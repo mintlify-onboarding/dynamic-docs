@@ -1,0 +1,65 @@
+---
+title: "Overview"
+description: "When using Dynamic, one of the first things you'll need to decide is whether you want to have users sign to prove ownership of their wallets or if you just want them to connect their wallets."
+---
+
+## Definitions
+
+As we talk about these two options, you'll regularly see that we either discuss a `visitor` or an `authenticated user` in our documents and dashboard. In short, here are there definitions:
+
+- `Visitor` is a user that connects their wallet to your dApp but has not yet signed to prove ownership of that wallet.
+  - You can identify a visitor as having a `primaryWallet` but user is not defined.
+- `Authenticated User` is a user that connects their wallet and has signed to prove ownership.
+  - You can identify an authenticated user since the `user` object will be defined.
+  - A JWT is returned for an authenticated user
+
+For example, here we log in a user whether they are connected or authenticated. We check for either a primary wallet or a user being defined.
+
+```typescript
+import { useDynamicContext } from "@dynamic-labs/sdk-react"; //later you will read about dynamicContext
+
+const HomePage = () => {
+  const { primaryWallet, user } = useDynamicContext();
+
+  if (primaryWallet !== null || user) {
+    return (
+      <div className={styles.logged_in}>
+        <WalletKitActions />
+      </div>
+    );
+  }
+
+  return <LoginView />;
+};
+```
+
+## An analogy to the rescue
+
+The difference can be explained with a simple analogy to confirming your phone number in a sign up flow.
+
+If you enter a phone number as part of a website registration flow, the website doesn’t actually know if you own that phone number. You can just as easily enter someone else’s phone number and register on their behalf.
+
+Hence, websites text you to confirm that you have access to your phone, making sure you are who you say you are. You have to enter a code and prove you have access to your phone number.
+
+The same holds true for wallets. Connecting is similar to entering a phone number. Signing is similar to entering the confirmation code you received on that number.
+
+In the sign in case, the way to do it is by generating a cryptographic nonce for you to sign with your private key. That signature proves without a doubt that you are indeed the owner of your wallet.
+
+## The difference, in practice
+
+At Dynamic, we're building deep authentication and authorization features that include access lists, information capture, NFT gating, and a lot more. For some of these features, a signed user **is required**. The reason being, we need to know that this user has confirmed ownership of the wallet and we can therefore trust that this is not a spoofed account.
+
+While we are aiming to limit the feature limitations between the `Visitor` and the `Authenticated user`, there are indeed some limitations and we hope the table below provides the appropriate context:
+
+| Feature                         | Connected Wallet | Signed User | Explanation                                                                                                                                                                  |
+| ------------------------------- | ---------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Multi-chain Authentication Flow | ✅               | ✅          |                                                                                                                                                                              |
+| JWT Token                       |                  | ✅          | JWT tokens are reserved for `authenticated users` who have proved ownership. `visitors` will get an API response with the wallet object                                      |
+| Users Table                     |                  | ✅          | Until a wallet is signed to prove ownership, a user_id is not generated in our DB                                                                                            |
+| Designs                         | ✅               | ✅          |                                                                                                                                                                              |
+| Information Capture             |                  | ✅          | Until a wallet is signed to prove ownership, a user_id is not generated in our DB so information cannot be associated to a user                                              |
+| Access Lists                    |                  | ✅          | Access lists will not work for connected only account. In your site, you'll want to ensure that only authenticated users can access your gated site or sections of the site. |
+| NFT Gating                      |                  | ✅          | NFT Gates will not work for connected only account. In your site, you'll want to ensure that only authenticated users can access your gated site or sections of the site.    |
+| Chainalysis                     | ✅               | ✅          |                                                                                                                                                                              |
+| Multi-wallet                    |                  | ✅          | We currently require that a user be authenticated to be able to access multiwallet functionality                                                                             |
+| Analytics                       | ✅               | ✅          | We display both authenticated users and visitors and segment our analytics accordingly                                                                                       |

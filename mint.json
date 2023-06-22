@@ -97,6 +97,26 @@
           ]
         }
       ]
+    },
+    {
+      "group": "Users",
+      "pages": [
+        "users/information-capture",
+        "users/email-verification",
+        {
+          "group": "Social Account Linking",
+          "pages": [
+            "users/social-account-linking/overview",
+            "users/social-account-linking/discord",
+            "users/social-account-linking/github",
+            "users/social-account-linking/google",
+            "users/social-account-linking/facebook",
+            "users/social-account-linking/instagram",
+            "users/social-account-linking/twitter",
+            "users/social-account-linking/twitch"
+          ]
+        }
+      ]
     }
   ],
   "footerSocials": {

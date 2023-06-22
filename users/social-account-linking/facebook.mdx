@@ -1,0 +1,27 @@
+---
+title: "Facebook"
+---
+
+## Creating a new App
+
+Here are the step-by-step instructions for obtaining OAuth credentials for Facebook:
+
+1. Go to the [Facebook Developers](https://developers.facebook.com/apps/) website and sign in to your account.
+2. Once you're signed in, click on the "My Apps" dropdown menu in the top navigation bar and select "Create App."
+3. Choose the type of app you want to create.
+4. Enter a name for your app and click "Create App ID."
+5. Once your app is created under "Add a product" section click "Set up" under Facebook Login card.
+6. Select "Settings" under "Facebook Login" section in the left side bar.
+7. Enter "Valid OAuth Redirect URIs". You can find the Valid OAuth Redirect URI in [Dynamic Dashboard](https://app.dynamic.xyz/dashboard/configurations).
+   1. Click "Information capture" card
+   2. Expand "Social Account Linking" section
+   3. Click "Configure" button next to the provider you want to configure.
+   4. Copy the Redirect URL and paste it in the "Valid OAuth Redirect URIs" field in Facebook.
+   5. Click "Save changes" on the bottom of the screen.
+8. Select "Basic" under "Settings" section in the left side bar.
+9. Copy the "App ID" and "App secret" and paste it into "Set up Facebook Auth" Modal in the Dynamic Dashboard.
+
+That's it! You now have OAuth credentials for your Facebook application that you can use in Dynamic.  
+Remember to enable the Facebook and later "Social accounts linking" field in the Information Capture Modal.
+
+If you need more help with configuring the Facebook OAuth App check their docs [here](https://developers.facebook.com/docs/development/create-an-app).

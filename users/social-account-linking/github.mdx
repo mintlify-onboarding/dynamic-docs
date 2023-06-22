@@ -1,0 +1,28 @@
+---
+title: "Github"
+---
+
+## Creating a new App
+
+Here are the step-by-step instructions for obtaining OAuth credentials for GitHub:
+
+1. Go to the [GitHub Developer Settings](https://github.com/settings/developers) page and sign in to your account.
+
+   1. If you're on your profile page, click "Developer Settings" at the bottom of the left-hand menu.
+
+1. Click on the Oauth Apps menu and then "Register a new application".
+1. Enter a name for your application, the homepage URL, and the callback URL. You can find the callback URL in [Dynamic Dashboard](https://app.dynamic.xyz/dashboard/configurations).
+   1. Click "Information capture" card
+   2. Expand "Social Account Linking" section
+   3. Click "Configure" button next to the Github provider.
+   4. Copy the Redirect URL and paste it in the Callback URL section in Github.
+1. Click "Register application" button.
+1. Github will create an OAuth app for you and will redirect you to the details page.
+1. Click "Generate a new client secret" button
+1. Copy the "Client ID" and "Client secret" you've just created and paste it into "Set up Github Auth" Modal in the Dynamic Dashboard.
+1. Click "Confirm" button.
+
+That's it! You now have OAuth credentials for your GitHub application that you can use in Dynamic.  
+Remember to enable the Github and later "Social accounts linking" field in the Information Capture Modal.
+
+If you need more help with configuring the Github OAuth App check their docs [here](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app).

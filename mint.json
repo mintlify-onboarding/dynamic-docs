@@ -117,6 +117,27 @@
           ]
         }
       ]
+    },
+    {
+      "group": "Wallets",
+      "pages": [
+        {
+          "group": "Wallets",
+          "pages": [
+            "wallets/wallets/sort-and-filter-wallets",
+            "wallets/wallets/multi-wallet"
+          ]
+        },
+        {
+          "group": "Introduction",
+          "pages": [
+            "wallets/embedded-wallets/overview",
+            "wallets/embedded-wallets/magic",
+            "wallets/embedded-wallets/smart-embedded-wallets",
+            "wallets/embedded-wallets/send-balance"
+          ]
+        }
+      ]
     }
   ],
   "footerSocials": {

@@ -1,0 +1,30 @@
+---
+title: "Discord"
+---
+
+## Creating a new App
+
+Here are the step-by-step instructions for obtaining OAuth credentials for Discord:
+
+1. Go to the [Discord Developer Portal](https://discord.com/developers/applications) and sign in to your account.
+2. Once you're signed in, click on the "New Application" button in the top right corner of the screen.
+3. Enter a name for your application and click the "Create" button.
+4. In the left-hand menu, click on the "OAuth2" tab.
+5. Return to your [Dynamic Dashboard](https://app.dynamic.xyz/dashboard/configurations) and configure Discord OAuth by following these steps:
+   1. Go to the Configuration page
+   2. Click on the "Information capture" card
+   3. Expand "Social Account Linking" section
+   4. Click "Configure" button next to the Discord provider
+   5. Copy the "Client ID" and "Client secret" from the application you created in Discord and paste it into the modal in the Dynamic Dashboard.
+      1. We recommend you already copy the Redirect URL to your clipboard so you can use it in the next step.
+   6. Click Confirm.
+6. Return to your Discord OAuth2 page:
+   1. Under the "OAuth2 Redirects" section, click the "Add Redirect" button.
+   2. Copy & paste the Redirect URL provided in your Dynamic Dashboard in the prior step.
+   3. Copy the Redirect URL and paste it in the section on Discord page.
+   4. Click "Save changes" button.
+
+That's it! You now have OAuth credentials for your Discord application that you can use in Dynamic.  
+Remember to enable the Discord and later "Social accounts linking" field in the Information Capture Modal.
+
+If you need more help with configuring the Discord OAuth App check their docs [here](https://discord.com/developers/docs/topics/oauth2).

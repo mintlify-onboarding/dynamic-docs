@@ -1,0 +1,28 @@
+---
+title: "Twitch"
+---
+
+## Creating a new App
+
+Here are the step-by-step instructions for obtaining OAuth credentials for Twitch:
+
+1. Go to the [Twitch Developer Portal](https://dev.twitch.tv/console) and sign in to your account.
+2. Once you're signed in, click on the [Applications](https://dev.twitch.tv/console/apps) on the left nav bar
+3. Click on "Register Your Application", and enter the following information:
+   1. Name of your application
+   2. OAuth Redirect URLs
+      1. Return to your [Dynamic Dashboard](https://app.dynamic.xyz/dashboard/configurations) and configure Twitch OAuth
+      2. Go to the Configuration page
+      3. Click on the "Information capture" card
+      4. Expand "Social Account Linking" section
+      5. Click "Configure" button next to the Twitch provider
+      6. Copy & paste the Redirect URL provided in your Dynamic Dashboard to the text field in Twitch
+   3. Category (You can select any that is most appropriate)
+4. Click "Create"
+5. You should see a new row added to the "Developer Applications" table
+6. On the right side of the table in the app you just created, click on "Manage"
+7. Click on "New Secret", this will generate a secret key you will see only once
+8. Copy the "Client ID" and "Client secret" from the application you created in Twitch and paste it into the modal in the Dynamic Dashboard.
+
+That's it! You now have OAuth credentials for your Twitch application that you can use in Dynamic.  
+Remember to enable the Twitch and later "Social accounts linking" field in the Information Capture Modal.

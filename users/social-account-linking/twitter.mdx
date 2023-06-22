@@ -1,0 +1,27 @@
+---
+title: "Twitter"
+---
+
+<Warning>🚧 This may be outdated with recent Twitter changes.</Warning>
+
+## Creating a new App
+
+Here are the step-by-step instructions for obtaining OAuth credentials for Twitter:
+
+1. Go to the [Twitter Developer Portal](https://developer.twitter.com/en/portal/dashboard) and sign in to your account.
+2. Once you're signed in, select "Settings" in your app card.
+3. Under "User authentication settings" select "Set up"
+4. Select "App permissions" and "Type of App" you want.
+5. Under "App info" paste the "Redirect URL". You can find the valid Redirect URL in [Dynamic Dashboard](https://app.dynamic.xyz/dashboard/configurations).
+   1. Click "Information capture" card
+   2. Expand "Social Account Linking" section
+   3. Click "Configure" button next to the provider you want to configure.
+   4. Copy the Redirect URL and paste it in the "Redirect URL" field in Twitter Developer Portal.
+6. Enter your "Website URL".
+7. Click save under the form.
+8. Copy the "Client ID" and "Client Secret" and paste it into "Set up Twitter Auth" Modal in the Dynamic Dashboard.
+
+That's it! You now have OAuth credentials for your Twitter application that you can use in Dynamic.  
+Remember to enable the Twitter and later "Social accounts linking" field in the Information Capture Modal.
+
+If you need more help with configuring the Twitter OAuth App check their docs [here](https://developer.twitter.com/en/docs/authentication/guides).

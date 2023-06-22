@@ -1,0 +1,67 @@
+---
+title: "Migrate Users into Dynamic"
+description: "Dynamic.xyz offers a versatile platform for managing users and their associated data. If you're transitioning from another system, dynamic.xyz's API simplifies the process of migrating these users. The API is flexible and does not require any specific field to create a user, you only need at least one field. This guide will demonstrate how to migrate users from a data source, such as a CSV file, into dynamic.xyz's user management system using TypeScript."
+---
+
+**Step 1: Get an API Token**
+
+You'll first need to obtain an API token from the dynamic.xyz dashboard. Follow the instructions provided in the [API reference](/api-reference/overview#get-an-api-token-from-dashboard) to get your token.
+
+**Step 2: Prepare Your Data Source**
+
+Prepare a data source, such as a CSV file, with your users' data. In this guide, we'll use a CSV file as an example, but remember that you can use any data source that you can read programmatically. The file needs to contain at least one field for each user.
+
+**Step 3: Write a Script to Send Requests**
+
+You can use a script to read from your data source and send POST requests to the dynamic.xyz create user API endpoint. Here's an example script in TypeScript using `axios` and `csv-parser`:
+
+```typescript
+import axios from "axios";
+import fs from "fs";
+import csv from "csv-parser";
+
+// Replace with your actual API token and environment ID
+const API_TOKEN = "YOUR_API_TOKEN";
+const ENVIRONMENT_ID = "<<sandboxEnvironmentId>>";
+
+// URL for the API endpoint
+const url = `https://app.dynamic.xyz/api/v0/environments/${ENVIRONMENT_ID}/users`;
+
+// Set up headers for the request
+const headers = {
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${API_TOKEN}`,
+};
+
+// Open the CSV file and read the data
+fs.createReadStream("users.csv")
+  .pipe(csv())
+  .on("data", async (row) => {
+    // Prepare the user data for the request
+    const user_data = {
+      field: row["field"], // replace 'field' with the actual field name from your CSV
+    };
+
+    // Send the POST request to the API
+    try {
+      const response = await axios.post(url, user_data, { headers });
+      console.log(
+        `User created successfully: ${JSON.stringify(response.data)}`
+      );
+    } catch (error) {
+      console.error(`Failed to create user. Error: ${error}`);
+    }
+  });
+```
+
+In the above TypeScript code, replace `'users.csv'` with the path to your actual data source, and replace `'YOUR_API_TOKEN'` and `'YOUR_ENVIRONMENT_ID'` with your actual API token and environment ID. Also, replace `'field'` with the name of the actual field you're using from your data source.
+
+Please note that this is a basic script and does not handle errors robustly. In a production environment, you'd want to add error handling code to deal with potential issues such as network errors, API rate limits, and incorrect data in your data source.
+
+Remember to install the necessary libraries if you haven't already done so:
+
+```shell
+npm install axios csv-parser
+```
+
+For more information on the user creation API endpoint, refer to the [API reference](/api-reference/creates-a-new-user).

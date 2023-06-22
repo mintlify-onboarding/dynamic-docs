@@ -1,0 +1,84 @@
+---
+title: "Reduce Bundle Size with Modular SDK"
+description: "Currently, our main SDK package `@dynamic-labs/sdk-react` is a one-size-fits-all package that bundles all our features and wallet support."
+---
+
+<Warning>
+    **This requires upgrading to a minimum of v0.17.0.**
+
+    Additionally, you should use the same version for all packages you use from our modular SDK
+
+</Warning>
+
+This is generally great for those starting out and testing out all the various features and multi chain wallet support.
+
+However, if you're looking to trim any unnecessary libraries used by our SDK to reduce your bundle size to the minimum, then you can now utilize a set of new packages of your choosing.
+
+<Note>
+    📘 **The following guide uses the @dynamic-labs/sdk-react-core package**
+
+    `@dynamic-labs/sdk-react` and `@dynamic-labs/sdk-react-core` are almost identical except that the core package does not automatically include all the available supported wallets and their libraries.
+
+    Although it's possible to do everything with `@dynamic-labs/sdk-react`, you will not reduce bundle size unless you switch to the core SDK package.
+
+</Note>
+
+# Choosing the right package(s)
+
+There are two main types of packages:
+
+- **Libs** Depends on a single 3rd party library to provide specific support for one or more wallets/networks
+- **All** Depends on all **Libs** packages of the same chain (i.e. ethereum-all includes all EVM packages with exception of Magic)
+  - Additionally, any new **Libs** packages for any chain will be added to their respective **All** package.
+
+In most cases, a **All** package(s) will suffice for your needs.
+
+# Packages (All)
+
+| Package Name               | Dependencies                 | Minimum Version | Chain  | Export                     |
+| -------------------------- | ---------------------------- | --------------- | :----- | -------------------------- |
+| @dynamic-labs/ethereum-all | _ethereum, coinbase, blocto_ | v0.17.0-RC.11   | EVM    | `EthereumWalletConnectors` |
+| @dynamic-labs/algorand-all | _myalgo_                     | v0.17.0-RC.11   | ALGO   | `AlgorandWalletConnectors` |
+| @dynamic-labs/solana-all   |                              | v0.17.0-RC.11   | SOL    | `SolanaWalletConnectors`   |
+| @dynamic-labs/flow-all     | _flow_                       | v0.17.0-RC.11   | FLOW   | `FlowWalletConnectors`     |
+| @dynamic-labs/starknet-all | _starknet_                   | v0.17.0-RC.11   | STARK  | `StarknetWalletConnectors` |
+| @dynamic-labs/cosmos-all   |                              | v0.17.0-RC.11   | COSMOS | `CosmosWalletConnectors`   |
+
+# Packages (Libs)
+
+| Package Name           | Minimum Version | Chain | Export                     |
+| ---------------------- | :-------------- | ----- | -------------------------- |
+| @dynamic-labs/ethereum | v0.17.0-RC.11   | EVM   | `EthereumWalletConnectors` |
+| @dynamic-labs/magic    | v0.17.0-RC.11   | EVM\* | `MagicWalletConnectors`    |
+| @dynamic-labs/coinbase | v0.17.0-RC.11   | EVM   | `CoinbaseWalletConnectors` |
+| @dynamic-labs/blocto   | v0.17.0-RC.11   | EVM   | `BloctoWalletConnectors`   |
+| @dynamic-labs/flow     | v0.17.0-RC.11   | FLOW  | `FlowWalletConnectors`     |
+| @dynamic-labs/myalgo   | v0.17.0-RC.11   | ALGO  | `MyAlgoWalletConnectors`   |
+| @dynamic-labs/starknet | v0.17.0-RC.11   | STARK | `StarknetWalletConnectors` |
+
+\*Currently Magic only supports EVM, but it is not included in the **All** _ethereum-all_ package
+
+# Implementation
+
+1. **Required** You must replace `@dynamic-labs/sdk-react` with `@dynamic-labs/sdk-react-core`
+2. Import 1 or more wallet connectors from the packages listed above
+3. Add to an array in your settings under `walletConnectors`
+
+```javascript javascript
+import { DynamicContextProvider, DynamicWidget} from '@dynamic-labs/sdk-react-core';
+import { EthereumWalletConnectors } from '@dynamic-labs/ethereum-all';
+import { SolanaWalletConnectors } from '@dynamic-labs/solana-all';
+
+const App = () => (
+  <DynamicContextProvider
+     settings={{
+       ...
+       walletConnectors: [ EthereumWalletConnectors, SolanaWalletConnectors ],
+  		 ...
+    }}>
+    <DynamicWidget />
+  </DynamicContextProvider>
+);
+
+export default App;
+```

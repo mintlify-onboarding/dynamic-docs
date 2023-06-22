@@ -1,0 +1,113 @@
+---
+title: "Wagmi"
+description: "If you're already using or would like to use Wagmi, not to worry, because Dynamic works alongside Wagmi! This page describes a setup where your users interact with the Dynamic SDK for authentication, while using Wagmi hooks to interact with your users' wallets."
+---
+
+In this guide, we'll walk you through the 2 steps required to use Wagmi within Dynamic:
+
+1. Install the DynamicWagmiConnector package
+2. Setup the DynamicWagmiConnector
+
+### 1. Install DynamicWagmiConnector
+
+First, you want to install the DynamicWagmiConnector package using `npm` or `yarn`
+
+<CodeGroup>
+
+```typescript npm
+npm install @dynamic-labs/wagmi-connector
+```
+
+```Text yarn
+yarn add @dynamic-labs/wagmi-connector
+```
+
+</CodeGroup>
+
+### 2. Import and add DynamicWagmiConnector to your App
+
+Next you'll want to:
+
+1. Import the DynamicWagmiConnector
+2. Wrap your app with the `DynamicWagmiConnector`
+3. Pass your evmNetworks to `DynamicWagmiConnector` if you are using custom RPC URLs
+
+```typescript
+import { DynamicContextProvider, DynamicWidget } from "@dynamic-labs/sdk-react";
+
+// 1. Import the DynamicWagmiConnector
+import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
+
+export const App = () => {
+  return (
+    <DynamicContextProvider
+      settings={{
+        environmentId: "<<sandboxEnvironmentId>>",
+      }}
+    >
+      {/* 2. Wrap your app with the `DynamicWagmiConnector with an optional evmNetworks field` */}
+      <DynamicWagmiConnector
+        evmNetworks={[
+          {
+            blockExplorerUrls: ["https://etherscan.io/"],
+            chainId: 1,
+            chainName: "Ethereum Mainnet",
+            iconUrls: ["https://app.dynamic.xyz/assets/networks/eth.svg"],
+            nativeCurrency: { decimals: 18, name: "Ether", symbol: "ETH" },
+            networkId: 1,
+            privateCustomerRpcUrls: ["https://mainnet.infura.io/v3/xxxx"],
+            rpcUrls: ["https://cloudflare-eth.com"],
+            vanityName: "Ethereum",
+          },
+        ]}
+      >
+        <DynamicWidge />
+        <YourApp />
+      </DynamicWagmiConnector>
+    </DynamicContextProvider>
+  );
+};
+```
+
+<Note>
+    📘 **A note on `WagmiConfig`**
+
+    You may have noticed that the [WagmiConfig](https://wagmi.sh/react/WagmiConfig) is missing from the setup code. This is because `DynamicWagmiConnector` is in charge of rendering the `WagmiConfig` with a [Wagmi client](https://wagmi.sh/react/client). `DynamicWagmiConnector` will make sure to update the Wagmi client with the networks and RPC Providers that you've specified in the Dashboard and in props.
+
+    For more information on managing networks in the Dashboard, [see here](/chains-and-networks/configure-in-dashboard)
+
+    For more information on managing RPC Providers in the Dashboard, [see here](/chains-and-networks/rpc-urls)
+
+</Note>
+
+That's it! Inside of the YourApp component, you can use Wagmi hooks like `useAccount`, `useNetwork` and more, like so:
+
+```typescript
+import { useAccount, useNetwork } from "wagmi";
+
+const YourApp = () => {
+  const { address, isConnected } = useAccount();
+  const { chain } = useNetwork();
+
+  return (
+    <div>
+      <p>wagmi connected: {isConnected ? "true" : "false"}</p>
+      <p>wagmi address: {address}</p>
+      <p>wagmi network: {chain?.id}</p>
+    </div>
+  );
+};
+```
+
+<Note>
+    📘 **Install Wagmi**
+
+    Even though `DynamicWagmiConnector` has its own dependency on Wagmi, you will still need to install Wagmi and ethers separately in order to use Wagmi hooks. You can do this by running `npm i wagmi ethers`
+
+</Note>
+
+### Next Steps
+
+1. If you're adding networks not currently supported in our Dashboard, check out the [guide for adding custom networks](/chains-and-networks/custom-networks). Any networks added will be available through the Wagmi hooks.
+2. For more information on what you can do with Wagmi, check out their docs: https://wagmi.sh/react/getting-started
+3. Check out our full example repo here: https://github.com/dynamic-labs/dynamic-wagmi-example

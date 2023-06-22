@@ -1,41 +1,108 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "",
+  "name": "Dynamic",
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"
   },
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#",
-    "light": "#",
-    "dark": "#"
+    "primary": "#4779FF",
+    "light": "#A0BFFF",
+    "dark": "#0C3CBE",
+    "anchors": { "from": "#6393F8", "to": "#3D66E5" }
   },
   "topbarCtaButton": {
-    "name": "",
-    "url": ""
+    "name": "Start Free",
+    "url": "https://app.dynamic.xyz/"
   },
   "topbarLinks": [
     {
-      "name": "",
-      "url": ""
+      "name": "Live Demo",
+      "url": "https://demo.dynamic.xyz/"
     }
   ],
   "anchors": [
     {
-      "name": "",
-      "icon": "",
-      "url": ""
+      "name": "API Reference",
+      "icon": "square-terminal",
+      "url": "api-reference"
+    },
+    {
+      "name": "Changelog",
+      "icon": "megaphone",
+      "url": "changelog"
+    },
+    {
+      "name": "Blog",
+      "icon": "newspaper",
+      "url": "https://www.dynamic.xyz/blog"
+    },
+    {
+      "name": "Contact Us",
+      "icon": "envelope",
+      "url": "mailto:hello@dynamic.xyz"
     }
   ],
   "navigation": [
     {
-      "group": "",
-      "pages": [""]
+      "group": "Introduction",
+      "pages": ["introduction/introduction", "introduction/support"]
+    },
+    {
+      "group": "Quickstart and Tutorials",
+      "pages": [
+        {
+          "group": "Quickstarts",
+          "pages": [
+            "quickstart-and-tutorials/quickstarts/react",
+            "quickstart-and-tutorials/quickstarts/next.js"
+          ]
+        },
+        {
+          "group": "Tutorials",
+          "pages": [
+            "quickstart-and-tutorials/tutorials/modular-sdk",
+            "quickstart-and-tutorials/tutorials/wagmi",
+            "quickstart-and-tutorials/tutorials/viem",
+            "quickstart-and-tutorials/tutorials/walletconnect-v2",
+            "quickstart-and-tutorials/tutorials/migrate-users-into-dynamic",
+            "quickstart-and-tutorials/tutorials/migration-guide-rainbowkit"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Sign In Or Sign Up",
+      "pages": [
+        "sign-in-or-sign-up/overview",
+        {
+          "group": "Configuration",
+          "pages": [
+            "sign-in-or-sign-up/configuration/connect",
+            "sign-in-or-sign-up/configuration/authenticate",
+            "sign-in-or-sign-up/configuration/custom-sign-message",
+            "sign-in-or-sign-up/configuration/tos-and-privacy/policy",
+            "sign-in-or-sign-up/configuration/recommended-wallet"
+          ]
+        },
+        "sign-in-or-sign-up/server-side-verification",
+        {
+          "group": "Customize Onboarding",
+          "pages": [
+            "sign-in-or-sign-up/customize-onboarding/email-and-social-apps",
+            "sign-in-or-sign-up/customize-onboarding/access-lists",
+            "sign-in-or-sign-up/customize-onboarding/chainalysis",
+            "sign-in-or-sign-up/customize-onboarding/captcha"
+          ]
+        }
+      ]
     }
   ],
   "footerSocials": {
-    "twitter": "",
-    "linkedin": ""
-  }
+    "twitter": "https://twitter.com/dynamic_xyz",
+    "linkedin": "https://www.linkedin.com/company/dynamiclabs/",
+    "slack": "https://www.dynamic.xyz/join-slack"
+  },
+  "backgroundImage": "/images/background-image.png"
 }

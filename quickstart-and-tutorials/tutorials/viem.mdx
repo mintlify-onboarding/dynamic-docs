@@ -1,0 +1,69 @@
+---
+title: "Viem"
+---
+
+<Warning>
+    **Viem support is in alpha release.**
+
+    Please join our [Slack community](https://www.dynamic.xyz/slack) viem channel to discuss updates, issues and more.
+
+</Warning>
+
+## Overview
+
+With Dynamic, you can now chose either Ethers or [Viem](https://viem.sh/) as your core web 3 library.
+
+Regardless of the underlying library selected, the integration with Dynamic remains mostly the same, with small differences in some of the returned objects (see below).
+
+## Install Dynamic's sdk-react \[viem] npm package
+
+Please follow our quick-start [guide](/quickstart-and-tutorials/quickstart/react) for configuration instructions.
+
+<CodeGroup>
+
+```shell npm
+npm i @dynamic-labs/sdk-react@viem #The @viem tag points to the latest sdk version that supports viem
+
+```
+
+```Text yarn
+yarn add @dynamic-labs/sdk-react@viem
+```
+
+</CodeGroup>
+
+## (optional) Install Dynamic's wagmi \[viem] connector
+
+wagmi `>v1` only supports Viem. Please install the Dynamic's connector that support Viem and not Ethers.
+
+Follow our wagmi [guide](/quickstart-and-tutorials/tutorials/wagmi) for configuration instructions.
+
+<CodeGroup>
+
+```shell npm
+npm i @dynamic-labs/wagmi-connector@viem #The @viem tag points to the latest sdk version that supports viem
+
+```
+
+```Text yarn
+yarn add @dynamic-labs/wagmi-connector@viem  #The @viem tag points to the latest sdk version that supports viem
+```
+
+</CodeGroup>
+
+## Differences between the Ethers and Viem methods
+
+We currently kept the original method names, in future releases we might swap them with Viem's terminology.
+
+WalletConnector
+
+| Method                 | Ethers Return Type | Viem Return Type |
+| :--------------------- | :----------------- | :--------------- |
+| getWeb3Provider()      | Web3Provider       | WalletClient     |
+| getRpcProvider()       | JsonRpcProvider    | PublicClient     |
+| getSigner              | JsonRpcSigner      | WalletClient     |
+| getConnectedAccounts() | string             | `0x{string}`     |
+
+## Known issues
+
+- We have seen some issues with Blocto, and we are actively working on getting it to work with Viem.

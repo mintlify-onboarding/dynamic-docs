@@ -1,0 +1,700 @@
+---
+title: "CSS Variables"
+---
+
+<Note>Must be on SDK v0.15.x</Note>
+
+The Dynamic SDK allows you to customize the theme via [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties). We recommend setting these CSS variables in your host site by targetting the `dynamic-shadow-dom` class.
+
+Here is an example of a custom theme done via CSS variables and the code used below:
+
+<div>
+  "html": "<iframe frameBorder="\&quot;0\&quot;" width="\&quot;100%\&quot;" height="\&quot;600px\&quot;" src="\&quot;https://readme-embeds.dynamic.xyz/css-variables\&quot;" style={{\"borderRadius: ''}} 4px\" />"
+</div>
+
+```css
+.dynamic-shadow-dom {
+  --dynamic-font-family-primary: "Poppins", sans-serif;
+  --dynamic-font-family-numbers: "Roboto Mono", monospace, sans-serif;
+  --dynamic-base-1: #fff;
+  --dynamic-base-2: #fff;
+  --dynamic-base-3: #fff;
+  --dynamic-base-4: #fff;
+  --dynamic-base-5: #fff;
+  --dynamic-brand-hover-color: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.08),
+      rgba(0, 0, 0, 0.08)
+    ), #4779ff;
+  --dynamic-brand-primary-color: #4779ff;
+  --dynamic-brand-secondary-color: rgba(71, 121, 255, 0.15);
+  --dynamic-connection-green: #41cc99;
+  --dynamic-border-radius: 12px;
+  --dynamic-hover: rgba(22, 37, 77, 0.03);
+  --dynamic-error-1: #ff4646;
+  --dynamic-error-2: rgba(255, 70, 70, 0.1);
+  --dynamic-footer-background-color: #fff;
+  --dynamic-footer-text-color: #000;
+  --dynamic-footer-icon-color: #4779ff;
+  --dynamic-loading-animation-gradient: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.5) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  --dynamic-overlay: #fff;
+  --dynamic-shadow-down-1: 0px 3px 0px #fff;
+  --dynamic-shadow-down-2: 0px 3px 0px #000000;
+  --dynamic-shadow-down-3: 0px 6px 0px #000000;
+  --dynamic-shadow-up-1: 0px -8px 48px -8px rgba(109, 121, 165, 0.16);
+  --dynamic-text-link: #0047ff;
+  --dynamic-text-primary: #000;
+  --dynamic-text-secondary: black;
+  --dynamic-text-size-body-mini: 11px;
+  --dynamic-text-size-body-normal: 15px;
+  --dynamic-text-size-body-small: 12px;
+  --dynamic-text-size-button-primary: 14px;
+  --dynamic-text-size-button-secondary: 12px;
+  --dynamic-text-size-numbers-big: 14px;
+  --dynamic-text-size-numbers-medium: 12px;
+  --dynamic-text-size-numbers-small: 10px;
+  --dynamic-text-size-title: 18px;
+  --dynamic-text-tertiary: rgba(0, 0, 0, 0.65);
+  --dynamic-badge-background: #000;
+  --dynamic-badge-color: #fff;
+  --dynamic-badge-dot-background: #fff;
+  --dynamic-search-bar-background: ;
+  --dynamic-search-bar-background-hover: ;
+  --dynamic-search-bar-background-focus: #fff;
+  --dynamic-search-bar-border: 2px solid #000;
+  --dynamic-search-bar-border-hover: 2px solid #000;
+  --dynamic-search-bar-border-focus: 2px solid #000;
+  --dynamic-modal-border: 2px solid #000;
+  --dynamic-modal-width: 22.5rem;
+  --dynamic-modal-padding: 1.5rem;
+  --dynamic-footer-padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+  --dynamic-footer-border: 2px solid #000;
+  --dynamic-wallet-list-tile-padding: 0.75rem;
+  --dynamic-wallet-list-tile-gap: 0.375rem;
+  --dynamic-wallet-list-max-height: 16.25rem;
+  --dynamic-wallet-list-tile-background: #fff;
+  --dynamic-wallet-list-tile-border: 2px solid #000000;
+  --dynamic-wallet-list-tile-shadow: 0px 3px 0px #fff;
+  --dynamic-wallet-list-tile-background-hover: #fff;
+  --dynamic-wallet-list-tile-border-hover: 2px solid #000000;
+  --dynamic-wallet-list-tile-shadow-hover: 0px 3px 0px #000000;
+  --dynamic-connect-button-background: #fff;
+  --dynamic-connect-button-color: #000;
+  --dynamic-connect-button-border: 2px solid #000;
+  --dynamic-connect-button-shadow: 0px 3px 0px #fff;
+  --dynamic-connect-button-background-hover: rgba(22, 37, 77, 0.03);
+  --dynamic-connect-button-color-hover: #000;
+  --dynamic-connect-button-border-hover: 2px solid #000;
+  --dynamic-connect-button-shadow-hover: 0px 3px 0px #000000;
+  --dynamic-tooltip-color: #000;
+  --dynamic-tooltip-text-color: #fff;
+}
+```
+
+<div>
+  {"{"}
+  "html": "<style
+    dangerouslySetInnerHTML={{
+      __html:
+        "\\n  details {\\n    width: 100%;\\n    margin-bottom: 0.5rem;\\n  }\\n\\n  details .content {\\n    margin-left: 1.6rem;\\n  }\\n\\n  details:after {\\n    border-bottom: 1px solid var(--color-border-default);\\n    position: absolute;\\n    content: '';\\n    left: 1.6rem;\\n    right: 0;\\n  }\\n\\n  summary {\\n    padding: 1rem;\\n    font-size: 1.2rem;\\n    display: block;\\n    padding-left: 1.6rem;\\n    position: relative;\\n    cursor: pointer;\\n  }\\n\\n  details[open] > summary:before {\\n    transform: rotate(90deg);\\n  }\\n\\n  details summary::-webkit-details-marker {\\n    display: none;\\n  }\\n\\n  summary::marker {\\n    content: '';\\n  }\\n\\n  summary:before {\\n    content: '▶️';\\n    position: absolute;\\n    left: 0;\\n    transform: rotate(0);\\n    transform-origin: 50% 50%;\\n    transition: 0.25s transform ease;\\n  }\\n\\n  details > ul {\\n    padding-bottom: 1rem;\\n    margin-bottom: 0;\\n  }\\n\\n  th {\\n    text-align: start;\\n  }\\n",
+    }}
+  />
+  \n
+  <details>
+    \n <summary id='\"theme-variables\"'>Theme variables</summary>\n{" "}
+    <div className='\"content\"'>
+      \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n
+      \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n
+      \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n
+      \n \n \n{" "}
+      <table className='\"plain\"'>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <code>--dynamic-base-1</code>
+            </td>
+            <td>Base 1 color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-base-2</code>
+            </td>
+            <td>Base 2 color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-base-3</code>
+            </td>
+            <td>Base 3 color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-base-4</code>
+            </td>
+            <td>Base 4 color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-base-5</code>
+            </td>
+            <td>Base 5 color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-brand-primary-color</code>
+            </td>
+            <td>Brand primary color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-connection-green-1</code>
+            </td>
+            <td>Connected status dot color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-connection-green-2</code>
+            </td>
+            <td>Connected status background color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-border-radius</code>
+            </td>
+            <td>Border radius (default 24px)</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-hover</code>
+            </td>
+            <td>Hover background color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-error-1</code>
+            </td>
+            <td>Error text color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-error-2</code>
+            </td>
+            <td>Error background color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-loading-animation-gradient</code>
+            </td>
+            <td>Loading animation gradient</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-shadow-down-1</code>
+            </td>
+            <td>Shadown down 1</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-shadow-down-2</code>
+            </td>
+            <td>Shadown down 2</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-shadow-down-3</code>
+            </td>
+            <td>Shadown down 3</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-shadow-up-1</code>
+            </td>
+            <td>Shadown up 1</td>
+          </tr>
+        </tbody>
+      </table>
+      \n
+    </div>
+    \n
+  </details>
+  \n\n
+  <details>
+    \n <summary id='\"text-variables\"'>Text variables</summary>\n{" "}
+    <div className='\"content\"'>
+      \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n
+      \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n
+      \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n{" "}
+      <table className='\"plain\"'>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <code>--dynamic-font-family-primary</code>
+            </td>
+            <td>Font used for general text</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-font-family-numbers</code>
+            </td>
+            <td>Font used for number elements</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-text-primary</code>
+            </td>
+            <td>Primary text color</td>
+          </tr>
+          <tr>
+            <td>
+              <code> --dynamic-text-secondary</code>
+            </td>
+            <td>Secondary text color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-text-tertiary</code>
+            </td>
+            <td>Tertiary text color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-text-link</code>
+            </td>
+            <td>Link text color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-text-size-body-mini</code>
+            </td>
+            <td>Text size body mini</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-text-size-body-small</code>
+            </td>
+            <td>Text size body small</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-text-size-body-normal</code>
+            </td>
+            <td>Text size body normal</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-text-size-button-primary</code>
+            </td>
+            <td>Text size primary button</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-text-size-button-secondary</code>
+            </td>
+            <td>Text size secondary button</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-text-size-numbers-small</code>
+            </td>
+            <td>Text size small numbers</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-text-size-numbers-medium</code>
+            </td>
+            <td>Text size medium numbers</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-text-size-numbers-big</code>
+            </td>
+            <td>Text size big numbers</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-text-size-title</code>
+            </td>
+            <td>Text size title</td>
+          </tr>
+        </tbody>
+      </table>
+      \n
+    </div>
+    \n
+  </details>
+  \n\n
+  <details>
+    \n <summary id='\"modal-variables\"'>Modal variables</summary>\n{" "}
+    <div className='\"content\"'>
+      \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n
+      \n \n \n \n \n{" "}
+      <table className='\"plain\"'>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <code>--dynamic-modal-border</code>
+            </td>
+            <td>Modal border</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-modal-width</code>
+            </td>
+            <td>Modal width</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-modal-padding</code>
+            </td>
+            <td>Modal padding</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-modal-backdrop-background</code>
+            </td>
+            <td>Modal backdrop background</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-modal-backdrop-filter</code>
+            </td>
+            <td>Modal backdrop filter</td>
+          </tr>
+        </tbody>
+      </table>
+      \n
+    </div>
+    \n
+  </details>
+  \n\n
+  <details>
+    \n <summary id='\"footer-variables\"'>Footer variables</summary>\n{" "}
+    <div className='\"content\"'>
+      \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n
+      \n \n \n \n \n \n \n \n \n{" "}
+      <table className='\"plain\"'>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <code>--dynamic-footer-background-color</code>
+            </td>
+            <td>Background color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-footer-text-color</code>
+            </td>
+            <td>Text color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-footer-icon-color</code>
+            </td>
+            <td>Icon color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-footer-arrow-color</code>
+            </td>
+            <td>Arrow color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-footer-border</code>
+            </td>
+            <td>Top and bottom border</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-footer-padding</code>
+            </td>
+            <td>Footer padding</td>
+          </tr>
+        </tbody>
+      </table>
+      \n
+    </div>
+    \n
+  </details>
+  \n\n
+  <details>
+    \n <summary id='\"wallet-list-variables\"'>Wallet list variables</summary>\n{" "}
+    <div className='\"content\"'>
+      \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n
+      \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n
+      \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n
+      \n \n \n \n \n \n \n \n \n \n \n{" "}
+      <table className='\"plain\"'>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <code>--dynamic-wallet-list-max-height</code>
+            </td>
+            <td>Maximum wallet list height</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-wallet-list-tile-gap</code>
+            </td>
+            <td>Gap between wallet tiles</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-wallet-list-tile-padding</code>
+            </td>
+            <td>Wallet tile padding</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-wallet-list-tile-background</code>
+            </td>
+            <td>Wallet tile background</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-wallet-list-tile-border</code>
+            </td>
+            <td>Wallet tile border</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-wallet-list-tile-shadow</code>
+            </td>
+            <td>Wallet tile shadow</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-wallet-list-tile-background-hover</code>
+            </td>
+            <td>Wallet tile background on hover</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-wallet-list-tile-border-hover</code>
+            </td>
+            <td>Wallet tile border on hover</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-wallet-list-tile-shadow-hover</code>
+            </td>
+            <td>Wallet tile shadow on hover</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-wallet-list-tile-animation-duration</code>
+            </td>
+            <td>
+              \n Wallet time animation duration between regular and hover
+              state\n{" "}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-badge-background</code>
+            </td>
+            <td>Wallet tile badge background</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-badge-color</code>
+            </td>
+            <td>Wallet tile badge text color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-badge-dot-background</code>
+            </td>
+            <td>Wallet tile badge dot background</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-search-bar-background</code>
+            </td>
+            <td>Wallet search bar background</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-search-bar-border</code>
+            </td>
+            <td>Wallet search bar border</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-search-bar-background-hover</code>
+            </td>
+            <td>Wallet search bar background on hover</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-search-bar-border-hover</code>
+            </td>
+            <td>Wallet search bar border on hover</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-search-bar-background-focus</code>
+            </td>
+            <td>Wallet search bar background on focus</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-search-bar-border-focus</code>
+            </td>
+            <td>Wallet search bar border on focus</td>
+          </tr>
+        </tbody>
+      </table>
+      \n
+    </div>
+    \n
+  </details>
+  \n\n
+  <details>
+    \n{" "}
+    <summary id='\"connect-button-variables\"'>
+      Connect button variables
+    </summary>
+    \n <div className='\"content\"'>
+      \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n
+      \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n{" "}
+      <table className='\"plain\"'>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <code>--dynamic-connect-button-background</code>
+            </td>
+            <td>Button background</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-connect-button-color</code>
+            </td>
+            <td>Button text color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-connect-button-border</code>
+            </td>
+            <td>Button border</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-connect-button-shadow</code>
+            </td>
+            <td>Button shadow</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-connect-button-background-hover</code>
+            </td>
+            <td>Button background on hover</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-connect-button-color-hover</code>
+            </td>
+            <td>Button text color on hover</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-connect-button-border-hover</code>
+            </td>
+            <td>Button border on hover</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-connect-button-shadow-hover</code>
+            </td>
+            <td>Button shadow on hover</td>
+          </tr>
+        </tbody>
+      </table>
+      \n
+    </div>
+    \n
+  </details>
+  \n\n
+  <details>
+    \n <summary id='\"other-variables\"'>Other variables</summary>\n{" "}
+    <div className='\"content\"'>
+      \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n{" "}
+      <table className='\"plain\"'>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <code>--dynamic-overlay</code>
+            </td>
+            <td>Widget connection modal overlay</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-tooltip-color</code>
+            </td>
+            <td>Tooltip background color</td>
+          </tr>
+          <tr>
+            <td>
+              <code>--dynamic-tooltip-text-color</code>
+            </td>
+            <td>Tooltip text color</td>
+          </tr>
+        </tbody>
+      </table>
+      \n
+    </div>
+    \n
+  </details>
+  \n"
+  {"}"}
+</div>
+
+If you wish to customize the UI even more, we recommend using [CSS overrides](/design-customizations/custom-css).

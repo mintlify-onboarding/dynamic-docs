@@ -146,6 +146,50 @@
         "chains-and-networks/custom-networks",
         "chains-and-networks/rpc-urls"
       ]
+    },
+    {
+      "group": "Fiat Onboarding",
+      "pages": ["fiat-onboarding/fiat-onramps"]
+    },
+    {
+      "group": "Design Customizations",
+      "pages": [
+        "design-customizations/configure-in-dashboard",
+        "design-customizations/css-variables",
+        "design-customizations/custom-css",
+        "design-customizations/light-and-dark-mode"
+      ]
+    },
+    {
+      "group": "Developer Dashboard",
+      "pages": [
+        "developer-dashboard/sdk-and-api-keys",
+        "developer-dashboard/sandbox-vs-live",
+        "developer-dashboard/analytics",
+        {
+          "group": "User Management",
+          "pages": [
+            "developer-dashboard/user-management/users",
+            "developer-dashboard/user-management/visitors"
+          ]
+        },
+        {
+          "group": "Settings",
+          "pages": [
+            "developer-dashboard/settings/general",
+            "developer-dashboard/settings/security",
+            "developer-dashboard/settings/privacy"
+          ]
+        },
+        {
+          "group": "Admin",
+          "pages": [
+            "developer-dashboard/admin/invite-members",
+            "developer-dashboard/admin/projects",
+            "developer-dashboard/admin/organizations"
+          ]
+        }
+      ]
     }
   ],
   "footerSocials": {

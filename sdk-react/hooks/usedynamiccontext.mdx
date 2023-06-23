@@ -10,29 +10,28 @@ description: "Dynamic's React Context which is set via DynamicContextProvider"
 | authToken: getAuthToken()                      | JSON web token (JWT) stored if the user is authenticated. This is the authenticated user’s token. See: backend verification.                                                                           |
 | awaitingSignatureState: AwaitingSignatureState | This enum type specifies the current state while waiting for a signature of a new wallet to link in a multi-wallet enabled environment. This can be idle, linking_new_wallet, transferring_wallet      |
 | connectedWallets: Wallet[]                     | This contains a concatenated list of wallets between primaryWallet and secondaryWallets that are in a connected state.                                                                                 |
-|              getNameService(address?: string /| undefined): Promise<NameServiceData /| undefined>                                  | Returns ENS data for the primaryWallet (if address param is undefined) or for a secondary wallet with the given address, if there's any. **Only available on v0.17**                                   |
-
-handleUnlinkWallet(walletId: string): Promise Helper function to unlink a wallet given a wallet ID from the user account.
-handleLogOut: () => Promise A helper-method to log-out the currently authenticated user account.
-isAuthenticated: boolean Returns true when the user has been authenticated and has a JWT and valid user object.
-loadingNetwork: boolean Returns true when the SDK is looking for the network of the primary wallet’s wallet connector.
-multiWalletWidgetState: MultiWalletWidgetState This enum type specifies the current state of the widget in a multi-wallet enabled environment. This can be idle, awaiting_account_switch, awaiting_connection, awaiting_signature, detected_known_secondary_wallet, detected_new_wallet
-network: number | undefined This represents the current network selected for the primary wallet
-networkConfigurations: NetworkConfigurationMap | undefined This contains the current network configurations for various EVM and Solana chains. These information includes chain ID, RPC URLs, and other important information.
-primaryWallet: Wallet | null An instance of a Wallet that represents the most recent connected Wallet.
-qrcodeUri: string URI for the QR code to scan in the current modal.
-rpcProviders: DynamicRPCProviders List of RPC providers and their settings to communicate with web3 services. These providers are configured on Dynamic's dashboard.
-sdkHasLoaded: boolean An indicator that the sdk has completed loading.
-secondaryWallets: Wallet[] List of other authenticated wallets linked to the user account that are not primary wallets.
-setMultiWalletWidgetState: MultiWalletWidgetStateSetter It controls the intended state for a multi-wallet enabled environment.
-setPrimaryWallet: (walletId: string) => Promise In a multi-wallet environment, this function can be used to indicate that a wallet, given the wallet ID, should be considered the primary wallet.
-setShowAuthFlow: Dispatch<SetStateAction> It controls whether or not to display the DynamicAuthFlow SDK component.
-setShowQrcodeModal: Dispatch<SetStateAction> It controls whether or not to display a QR code modal.
-showAuthFlow: boolean The value set by setShowAuthFlow, it controls whether or not to display the DynamicAuthFlow SDK component.
-showQrcodeModal: boolean Value set by setShowQrcodeModal, it controls whether or not to display a QR code modal.
-walletConnector: WalletConnector | null An instance of a WalletConnector that represents the most recent connected Wallet.
-wallets: WalletOption[] List of all available wallet options the environment’s SDK users can select.
-user? : UserProfile Authenticated user's profile (not available on connect-only) See UserProfile
+|              getNameService(address?: string /| undefined): Promise`<NameServiceData /| undefined>`                                  | Returns ENS data for the primaryWallet (if address param is undefined) or for a secondary wallet with the given address, if there's any. **Only available on v0.17**                                   |
+| handleUnlinkWallet(walletId: string): Promise | Helper function to unlink a wallet given a wallet ID from the user account. | 
+| handleLogOut: () => Promise | A helper-method to log-out the currently authenticated user account. | 
+| isAuthenticated: boolean | Returns true when the user has been authenticated and has a JWT and valid user object. | 
+| loadingNetwork: boolean | Returns true when the SDK is looking for the network of the primary wallet’s wallet connector. | 
+| multiWalletWidgetState: MultiWalletWidgetState | This enum type specifies the current state of the widget in a multi-wallet enabled environment. This can be idle, awaiting_account_switch, awaiting_connection, awaiting_signature, detected_known_secondary_wallet, detected_new_wallet | 
+| network: number /| undefined |  This represents the current network selected for the primary wallet | 
+| networkConfigurations: NetworkConfigurationMap /| undefined  | This contains the current network configurations for various EVM and Solana chains. These information includes chain ID, RPC URLs, and other important information. | 
+| primaryWallet: Wallet /| null | An instance of a Wallet that represents the most recent connected Wallet.|
+| qrcodeUri: string | URI for the QR code to scan in the current modal.|
+| rpcProviders: DynamicRPCProviders | List of RPC providers and their settings to communicate with web3 services. These providers are configured on Dynamic's dashboard.|
+| sdkHasLoaded: boolean | An indicator that the sdk has completed loading.|
+| secondaryWallets: Wallet[] | List of other authenticated wallets linked to the user account that are not primary wallets.|
+| setMultiWalletWidgetState: MultiWalletWidgetStateSetter | It controls the intended state for a multi-wallet enabled environment.|
+| setPrimaryWallet: (walletId: string) => Promise |In a multi-wallet environment, this function can be used to indicate that a wallet, given the wallet ID, should be considered the primary wallet.|
+| setShowAuthFlow: Dispatch`<SetStateAction>` | It controls whether or not to display the DynamicAuthFlow SDK component.|
+| setShowQrcodeModal: Dispatch`<SetStateAction>` |  It controls whether or not to display a QR code modal.|
+| showAuthFlow: boolean |  The value set by setShowAuthFlow, it controls whether or not to display the DynamicAuthFlow SDK component.|
+| showQrcodeModal: boolean | Value set by setShowQrcodeModal, it controls whether or not to display a QR code modal. |
+|walletConnector: WalletConnector /| null | An instance of a WalletConnector that represents the most recent connected Wallet. | 
+| wallets: WalletOption[] | List of all available wallet options the environment’s SDK users can select. | 
+| user? : UserProfile | Authenticated user's profile (not available on connect-only) See UserProfile | 
 
 ## Examples
 

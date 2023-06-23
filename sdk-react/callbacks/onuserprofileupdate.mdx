@@ -1,0 +1,26 @@
+---
+title: "onUserProfileUpdate"
+description: "This callback will be called when user profile information is updated. To learn more about information capture, see the [here](https://docs.dynamic.xyz/docs/information-capture)."
+---
+
+## Usage
+
+```typescript
+<DynamicContextProvider
+  settings={{
+    eventsCallbacks: {
+      onUserProfileUpdate: (user) => {
+        console.log("onUserProfileUpdate was called", user);
+      },
+    },
+  }}
+>
+  {/* ... rest of your app ... */}
+</DynamicContextProvider>
+```
+
+## Callback Argument Value
+
+```typescript
+user: UserProfile;
+```

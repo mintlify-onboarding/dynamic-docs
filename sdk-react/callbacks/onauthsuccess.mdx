@@ -1,0 +1,39 @@
+---
+title: "onAuthSuccess"
+description: "This callback will be called after the user successfully authenticates by signing a message to confirm ownership. This only happens when using the `connect-and-sign` initialAuthenticationMode."
+---
+
+## Usage
+
+```typescript
+<DynamicContextProvider
+  settings={{
+    eventsCallbacks: {
+      onAuthSuccess: (args) => {
+        console.log("onAuthSuccess was called", args);
+      },
+    },
+  }}
+>
+  {/* ... rest of your app ... */}
+</DynamicContextProvider>
+```
+
+## Callback Argument Value
+
+```typescript
+{
+  authToken: string;
+  handleLogOut: () => Promise<void>;
+  isAuthenticated: boolean;
+  user: UserProfile;
+  walletConnector: WalletConnector;
+}
+```
+
+<Note>
+    For details about UserProfile, see [here](/sdk-react/object-reference/userprofile)
+
+    For details about WalletConnector, see [here](/sdk-react/object-reference/walletconnector)
+
+</Note>

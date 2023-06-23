@@ -1,0 +1,40 @@
+---
+title: "onLinkSuccess"
+description: "This callback will be called when the user successfully links a secondary wallet to an existing account. See the [multi-wallet docs](https://docs.dynamic.xyz/docs/multi-wallet) for more information."
+---
+
+## Usage
+
+```typescript
+<DynamicContextProvider
+  settings={{
+    eventsCallbacks: {
+      onLinkSuccess: (args) => {
+        console.log("onLinkSuccess was called", args);
+      },
+    },
+  }}
+>
+  {/* ... rest of your app ... */}
+</DynamicContextProvider>
+```
+
+## Callback Argument Value
+
+```typescript
+{
+  authToken: string;
+  handleLogOut: () => Promise<void>;
+  isAuthenticated: boolean;
+  user: UserProfile;
+  walletConnector: WalletConnector;
+}
+```
+
+<Note>
+
+    For details about UserProfile, see [here](/sdk-react/object-reference/userprofile)
+
+    For details about WalletConnector, see [here](/sdk-react/object-reference/walletconnector)
+
+</Note>

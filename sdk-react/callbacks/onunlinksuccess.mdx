@@ -1,0 +1,33 @@
+---
+title: "onUnlinkSuccess"
+description: "This callback will be called when the user successfully unlinks a secondary wallet to an existing account. See the [multi-wallet docs](https://docs.dynamic.xyz/docs/multi-wallet) for more information."
+---
+
+## Usage
+
+```typescript
+<DynamicContextProvider
+  settings={{
+    eventsCallbacks: {
+      onUnlinkSuccess: (args) => {
+        console.log("onUnlinkSuccess was called", args);
+      },
+    },
+  }}
+>
+  {/* ... rest of your app ... */}
+</DynamicContextProvider>
+```
+
+## Callback Argument Value
+
+```typescript
+unlinkedWallet: JwtVerifiedCredential;
+```
+
+This is called with the wallet that was just unlinked.
+
+<Note>
+  For details about JwtVerifiedCredential, see
+  [here](/sdk-react/object-reference/userprofile).
+</Note>

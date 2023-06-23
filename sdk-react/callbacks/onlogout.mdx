@@ -1,0 +1,33 @@
+---
+title: "onLogout"
+description: "This callback will be called after the user disconnects their wallet and logs out."
+---
+
+## Usage
+
+```typescript
+<DynamicContextProvider
+  settings={{
+    eventsCallbacks: {
+      onLogout: (args) => {
+        console.log("onLogout was called", args);
+      },
+    },
+  }}
+>
+  {/* ... rest of your app ... */}
+</DynamicContextProvider>
+```
+
+## Callback Argument Value
+
+```typescript
+user: UserProfile | undefined;
+```
+
+If your auth mode is connect-only, then the user argument will be undefined, otherwise the user argument will be the user object that just logged out.
+
+<Note>
+  For details about UserProfile, see
+  [here](/sdk-react/object-reference/userprofile)
+</Note>

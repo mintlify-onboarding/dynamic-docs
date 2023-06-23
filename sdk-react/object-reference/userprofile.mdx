@@ -1,0 +1,20 @@
+---
+title: "UserProfile"
+description: "An object containing attributes about the user such as the wallet address, email, first name, etc."
+---
+
+| Field                                        | Description                                                                                                                                                                                   |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `alias?: string`                             | [Optional] - User's alias                                                                                                                                                                     |
+| `chain: string`                              | Current BlockChain name                                                                                                                                                                       |
+| `environmentId: string`                      | Dynamic's environment ID                                                                                                                                                                      |
+| `email?: string`                             | [Optional] - User's email                                                                                                                                                                     |
+| `ens? : { name?: string, avatar?: string }`  | [Optional] - The wallet's ENS values                                                                                                                                                          |
+| `firstName?: string`                         | [Optional] - User's first name                                                                                                                                                                |
+| `isAuthenticatedWithAWallet: boolean`        | returns true if the user most recent authentication was with a wallet                                                                                                                         |
+| `lastName?: string`                          | [Optional] - User's last name                                                                                                                                                                 |
+| `newUser: boolean`                           | This `boolean` flag will contain the value `true` when the user signed-in and has completed the required information capture fields defined in the environment's settings for the first time. |
+| phoneNumber? string\`                        | [Optional] - User's phone number                                                                                                                                                              |
+| `verifiedCredentials: JWTVerifiedCredential` | List of the user's verified credentials. see: XXX                                                                                                                                             |
+| `wallet: string`                             | Current wallet name                                                                                                                                                                           |
+| `userId: string`                             | Dynamic's UUID                                                                                                                                                                                |

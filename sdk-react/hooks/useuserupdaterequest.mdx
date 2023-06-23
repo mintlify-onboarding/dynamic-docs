@@ -1,0 +1,96 @@
+---
+title: "useUserUpdateRequest"
+description: "The `useUserUpdateRequest` hook is a custom React hook designed for updating user profile information in your application. It provides an easy-to-use interface for developers to securely modify various user properties. The hook returns an `updateUser` function, which accepts an object following the `UserFields` interface to update the user profile information."
+---
+
+This hook can be used in scenarios where you want to allow users to update their profile information, such as when they edit their account settings, complete onboarding steps, or update their preferences.
+
+### UserFields interface
+
+The `updateUser` function provided by the `useUserUpdateRequest` hook accepts an object with properties that match the `UserFields` interface. The `UserFields` interface includes the following properties:
+
+| Property    | Description                                                                        |
+| ----------- | ---------------------------------------------------------------------------------- |
+| email       | The user's email address.                                                          |
+| alias       | The user's alias.                                                                  |
+| firstName   | The user's first name.                                                             |
+| lastName    | The user's last name.                                                              |
+| jobTitle    | The user's job title.                                                              |
+| phoneNumber | The user's phone number.                                                           |
+| tShirtSize  | The user's t-shirt size.                                                           |
+| team        | The user's team name.                                                              |
+| country     | The user's country, using the standard ISO 3166-1 alpha-2 two-letter country code. |
+| username    | The user's username.                                                               |
+
+By providing an object following the `UserFields` interface, the `updateUser` function allows you to update the necessary properties in the user profile while ensuring the restricted properties remain untouched.
+
+## The `userUpdate` function
+
+The `updateUser` function, provided by the `useUserUpdateRequest` hook, allows you to conveniently and securely handle user profile updates, including email verification when necessary.
+
+| Parameter    | Description                                                                                        |
+| ------------ | -------------------------------------------------------------------------------------------------- |
+| `userFields` | An object containing the user properties you want to update, following the `UserFields` interface. |
+
+### Output
+
+The `updateUser` function returns an object with the following properties:
+
+| Property                    | Description                                                                                                                                                                                                                                |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| isEmailVerificationRequired | A boolean indicating whether email verification is necessary after updating the user profile. If true, initiate the email verification process.                                                                                            |
+| updateUserProfileResponse   | An object containing the server response from the user profile update request.                                                                                                                                                             |
+| verifyEmailFn               | A scoped function for verifying the user's email, provided only if `isEmailVerificationRequired` is true. This function takes a single argument, `verificationToken`, which should be the email verification token received from the user. |
+
+### Example Usage
+
+In this example, the `useUserUpdateRequest` hook is imported and used in the UserProfileEdit component. The `updateUser` function is called with the userFields object when the user saves their profile information. If email verification is required (`isEmailVerificationRequired` is true), the `verifyEmailFn` function is used to handle the email verification process. Once the email is verified or if email verification is not required, you can handle the successful update, such as by showing a success message or redirecting the user to another page.
+
+```typescript
+import { useUserUpdateRequest } from '@dynamic-labs/sdk-react';
+
+function UserProfileEdit() {
+  const { updateUser } = useUserUpdateRequest();
+
+  const handleSave = async (userFields) => {
+    const {
+      isEmailVerificationRequired,
+      updateUserProfileResponse,
+      verifyEmailFn,
+    } = await updateUser(userFields);
+
+    if (isEmailVerificationRequired) {
+      // Trigger the email verification process
+      // Obtain the verificationToken from the user (e.g., from a user-input field)
+      const verificationToken = 'user-provided-verification-token';
+      await verifyEmailFn(verificationToken);
+      // Handle successful email verification, e.g., show a success message or redirect
+    } else {
+      // Handle successful update without email verification, e.g., show a success message or redirect
+    }
+  };
+
+  return (
+    // Render your component with user fields input and save button
+    // ...
+  );
+}
+```
+
+## CodeSandbox
+
+<iframe
+  width="560"
+  height="315"
+  src="https://codesandbox.io/embed/smoosh-smoke-lsob1y?fontsize=14&amp;hidenavigation=1&amp;theme=dark"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+
+## Integration with `useEmailVerificationRequest`
+
+The `useUserUpdateRequest` hook is designed to work seamlessly with the [useEmailVerificationRequest](https://dash.readme.com/project/dynamic/v2.5/docs/useemailverificationrequest) hook.
+
+To handle email verification in another view or component, you can directly use the `useEmailVerificationRequest` hook, which provides the verifyEmail function. This allows you to verify a user's email address after they update their email in their profile. Using both hooks together ensures a streamlined user experience while maintaining security and data integrity.

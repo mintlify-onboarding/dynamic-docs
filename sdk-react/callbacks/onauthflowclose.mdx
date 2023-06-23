@@ -1,0 +1,24 @@
+---
+title: "onAuthFlowClose"
+description: "This callback will be called after the auth flow modal is closed."
+---
+
+## Usage
+
+```typescript
+<DynamicContextProvider
+  settings={{
+    eventsCallbacks: {
+      onAuthFlowClose: () => {
+        console.log("onAuthFlowClose was called");
+      },
+    },
+  }}
+>
+  {/* ... rest of your app ... */}
+</DynamicContextProvider>
+```
+
+## Callback Argument Value
+
+None

@@ -1,0 +1,28 @@
+---
+title: "onConnectSuccess"
+description: "This callback will be called after the user successfully connect the wallet. This is only relevant when when using the `connect-only` initialAuthenticationMode."
+---
+
+## Usage
+
+```typescript
+<DynamicContextProvider
+  settings={{
+    eventsCallbacks: {
+      onConnectSuccess: (args) => {
+        console.log("onConnectSuccess was called", args);
+      },
+    },
+  }}
+>
+  {/* ... rest of your app ... */}
+</DynamicContextProvider>
+```
+
+## Callback Argument Value
+
+```typescript
+{
+  walletConnector: WalletConnector;
+}
+```

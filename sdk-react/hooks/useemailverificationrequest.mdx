@@ -1,0 +1,52 @@
+---
+title: "useEmailVerificationRequest"
+description: "The `useEmailVerificationRequest` hook is a custom React hook that simplifies the email verification process in your application. It provides an easy-to-use interface for developers to handle email verification and securely update user profiles. The hook returns a `verifyEmail` function that can be used to finalize the email verification process."
+---
+
+This hook is particularly useful when you need to verify a user's email address after they update their email in their profile, or when they sign up for the first time.
+
+## `VerifyEmail` Function
+
+The `verifyEmail` function, provided by the `useEmailVerificationRequest` hook, allows you to handle the email verification process for your users by submitting the email verification token they received.
+
+| Parameters        | Description                                                              |
+| ----------------- | ------------------------------------------------------------------------ |
+| verificationToken | A string representing the email verification token received by the user. |
+
+## Example Usage
+
+```typescript
+import { useEmailVerificationRequest } from '@dynamic-labs/sdk-react';
+
+function EmailVerification() {
+  const { verifyEmail } = useEmailVerificationRequest();
+
+  const handleVerify = async (verificationToken) => {
+    try {
+      const verifyEmailResponse = await verifyEmail(verificationToken);
+      // Handle successful email verification, e.g., show a success message or redirect
+    } catch (error) {
+      // Handle errors, e.g., show an error message or prompt for the correct token
+    }
+  };
+
+  return (
+    // Render your component with the verification token input and verify button
+    // ...
+  );
+}
+```
+
+In this example, the `useEmailVerificationRequest` hook is imported and used in the EmailVerification component. The `verifyEmail` function is called with the `verificationToken` when the user submits the email verification form. Upon successful email verification, you can handle the response, such as by showing a success message or redirecting the user to another page. If an error occurs, you can provide an appropriate error message or prompt the user to re-enter the verification token.
+
+## CodeSandbox
+
+<iframe
+  width="560"
+  height="315"
+  src="https://codesandbox.io/embed/smoosh-smoke-lsob1y?fontsize=14&hidenavigation=1&theme=dark"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>

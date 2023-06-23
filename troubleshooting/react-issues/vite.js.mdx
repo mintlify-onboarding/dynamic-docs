@@ -1,0 +1,75 @@
+---
+title: "Vite.js polyfills necessary for Dynamic SDK"
+---
+
+# Vite.js requires global and process polyfills
+
+If you're using Vite.js with react and using the Dynamic SDK you may get this error in your console:
+
+```
+util.js:109 Uncaught ReferenceError: process is not defined
+```
+
+This is because one of the many libraries that our SDK depends on uses the `process` module which is natively not in the browser environment nor is it automatically polyfilled by Vite.
+
+### Polyfill `process` using `vite.config.js`
+
+To fix this we must modify the `vite.config.js` file to modify `esbuild` to polyfill this for us. Here is a minimal example config:
+
+```Text TypeScript
+import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  resolve: {
+    alias: {
+      stream: 'stream-browserify',
+    },
+  },
+  plugins: [react()],
+  optimizeDeps: {
+    esbuildOptions: {
+      plugins: [
+        NodeGlobalsPolyfillPlugin({
+          process: true,
+        }),
+      ],
+    },
+  },
+});
+```
+
+In second step we need to edit `index.html` file and add a small script inside of html structure.
+
+```Text html
+<script>
+  window.global = window;
+</script>
+```
+
+Example `index.html` file:
+
+```Text html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite example app</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+  <script>
+    window.global = window;
+  </script>
+</html>
+
+```
+
+### Warning: You may still see a console error `React Static Flag Error`
+
+After applying the polyfill, you may still see an error for `React Static Flag Error`. This is currently expected. To learn more, checkout the troubleshooting page [React Static Flag Error](/troubleshooting/solved-issues/react-static-flag-error). At this time, you can ignore this error in local development environment.

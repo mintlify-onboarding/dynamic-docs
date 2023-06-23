@@ -257,6 +257,32 @@
           ]
         }
       ]
+    },
+    {
+      "group": "Troubleshooting",
+      "pages": [
+        {
+          "group": "React Issues",
+          "pages": [
+            "troubleshooting/react-issues/modal-pop-up",
+            "troubleshooting/react-issues/vite.js",
+            "troubleshooting/react-issues/react-17",
+            "troubleshooting/react-issues/source-map-warnings",
+            "troubleshooting/react-issues/jset-error"
+          ]
+        },
+        {
+          "group": "Wallet Issues",
+          "pages": ["troubleshooting/wallet-issues/app-store-redirect"]
+        },
+        {
+          "group": "Solved Issues",
+          "pages": [
+            "troubleshooting/solved-issues/module-not-found",
+            "troubleshooting/solved-issues/react-static-flag-error"
+          ]
+        }
+      ]
     }
   ],
   "footerSocials": {

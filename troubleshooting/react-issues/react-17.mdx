@@ -1,0 +1,70 @@
+---
+title: "React 17 With Dynamic React SDK >=0.14.0"
+description: "Starting with React 18, the imports used for `react/jsx-runtime` have changed a bit. You may see an error `Did you mean to import react/jsx-runtime.js?`"
+---
+
+# Summary
+
+For example:
+
+```
+Server Error
+Error: Cannot find module 'nextjs-blog/node_modules/react/jsx-runtime' imported from nextjs-blog/node_modules/@dynamic-labs/sdk-react/index.js
+Did you mean to import react/jsx-runtime.js?
+```
+
+The **Dynamic SDK** uses the new React 18 import which has backward compatibility with React 17 imports.
+
+To fix this, follow one of the solutions:
+
+- [NextJS](#nextjs)
+- [Webpack](#webpack)
+
+## NextJS
+
+NextJS introduced a configuration option to automatically transpile ESM packages.
+
+### NextJS version 13.1 or greater
+
+```Text next.config.js
+const nextConfig = {
+  experimental: {
+    transpilePackages: ['@dynamic-labs/sdk-react'],
+  },
+};
+```
+
+### NextJS version before 13.1
+
+Before 13.1, you need to `npm i next-transpile-modules` and update your next.config.js:
+
+```Text next.config.js
+const withTM = require('next-transpile-modules')(['@dynamic-labs/sdk-react']);
+
+const nextConfig = withTM({
+  reactStrictMode: true,
+});
+
+module.exports = nextConfig;
+
+```
+
+### Webpack
+
+If you are not using NextJS and using any other type of react application that uses Webpack with React 17, you can modify the webpack config to resolve this issue:
+
+```javascript webpack.config.js
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        resolve: {
+          fullySpecified: false, // disable the behaviour
+        },
+      },
+    ],
+  },
+};
+```

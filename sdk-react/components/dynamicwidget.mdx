@@ -1,0 +1,68 @@
+---
+title: "DynamicWidget"
+description: "Once a user connects their wallet, you may want to display a navigation component to show the current wallet and connected network. Additionally, if you collected information during onboarding, you may want to display the user's profile so they can edit their information, add additional wallets (if you [enabled multiwallet](https://docs.dynamic.xyz/docs/multi-wallet)), and more. The DynamicWidget is the parent component that has all these features available in it. If you want to explore sub-components for more granular control, then see [DynamicUserProfile](https://docs.dynamic.xyz/docs/dynamicwidgetcontent) and the [DynamicNav](https://docs.dynamic.xyz/docs/dynamicwidgetnav) components."
+---
+
+## Settings
+
+There are two settings available when you initialize the `DynamicWidget` in your App.
+
+| Method                            | Description                                                                                                                |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| innerButtonComponent?: ReactNode; | This is an optional component passed in to DynamicConnectButton. Defaults to `Connect your wallet`                         |
+| variant?: 'modal' \| 'dropdown';  | Specifies whether to show DynamicWidget as a centered modal or a dropdown from the DynamicNav button. Defaults to `modal`. |
+
+## Examples
+
+### variant = modal
+
+```
+import { DynamicContextProvider, DynamicWidget} from '@dynamic-labs/sdk-react';
+
+const App = () => (
+  <DynamicContextProvider
+     settings={{
+       environmentId: 'Enter your Environment ID here'
+    }}>
+    <DynamicWidget variant='modal' />
+  </DynamicContextProvider>
+);
+
+export default App;
+```
+
+<video
+  autoplay
+  muted
+  loop
+  playsinline
+  defaultMuted
+  className="w-full aspect-video"
+  src="https://dynamic-labs.github.io/readme-embeds/videos/DynamicWidgetVariantModal.mov"
+></video>
+### variant = dropdown
+
+```
+import { DynamicContextProvider, DynamicWidget} from '@dynamic-labs/sdk-react';
+
+const App = () => (
+  <DynamicContextProvider
+     settings={{
+       environmentId: 'Enter your Environment ID here'
+    }}>
+    <DynamicWidget variant='dropdown' />
+  </DynamicContextProvider>
+);
+
+export default App;
+```
+
+<video
+  autoplay
+  muted
+  loop
+  playsinline
+  defaultMuted
+  className="w-full aspect-video"
+  src="https://dynamic-labs.github.io/readme-embeds/videos/DynamicWidgetVariantDropdown.mov"
+></video>

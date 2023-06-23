@@ -1,0 +1,44 @@
+---
+title: "DynamicWagmiConnector"
+---
+
+## Usage
+
+```typescript
+import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
+import { DynamicContextProvider } from "@dynamic-labs/sdk-react";
+
+function App() {
+  return (
+    <DynamicContextProvider settings={{ environmentId: "your_env_id" }}>
+      <DynamicWagmiConnector>
+        <YourRoutes />
+      </DynamicWagmiConnector>
+    </DynamicContextProvider>
+  );
+}
+```
+
+## Props
+
+### evmNetworks
+
+You can pass a static `evmNetworks` array. This will be passed down to the [Wagmi client config](https://wagmi.sh/react/client#configuration).
+
+Example:
+
+```typescript
+const evmNetworks: EvmNetwork[] = [
+  {
+    blockExplorerUrls: ["https://etherscan.io/"],
+    chainId: 1,
+    chainName: "Ethereum Mainnet",
+    iconUrls: ["https://app.dynamic.xyz/assets/networks/eth.svg"],
+    nativeCurrency: { decimals: 18, name: "Ether", symbol: "ETH" },
+    networkId: 1,
+    privateCustomerRpcUrls: ["https://mainnet.infura.io/v3/your-api-key"],
+    rpcUrls: ["https://cloudflare-eth.com"],
+    vanityName: "Ethereum",
+  },
+];
+```

@@ -1,0 +1,61 @@
+---
+title: "DynamicNav"
+description: "The DynamicNav component is responsible for rendering the network picker and the connected account field. Typically, if you want to use the DynamicNav, we recommend using the DynamicWidget since it's connected to the DynamicUserProfile."
+---
+
+<Warning>
+    **🚧 A duplicate widget is displayed.**
+
+    Make sure you do not render `DynamicWidget` along with `DynamicNav`. These components should not be used together.
+
+</Warning>
+
+## Usage
+
+DynamicNav needs to be used with DynamicUserProfile. The example below is a full example to demonstrate how to properly use the DynamicNav alongside the DynamicUserProfile.
+
+```javascript
+import React from "react";
+import { createRoot } from "react-dom/client";
+import {
+  useDynamicContext,
+  DynamicWidget,
+  DynamicUserProfile,
+  DynamicContextProvider,
+  DynamicNav,
+} from "@dynamic-labs/sdk-react";
+import "./styles.css";
+
+const AuthorizationView = () => <DynamicWidget />;
+
+const AuthorizedUserView = () => {
+  const [dynamicNavVisible, setDynamicNavVisible] = React.useState(false);
+  return (
+    <>
+      {/* DynamicNav is hidden when pressed. DynamicUserProfile remains visible. */}
+      <div onClick={() => setDynamicNavVisible((v) => !v)}>
+        <p>Click to show DynamicNav</p>
+        {dynamicNavVisible && <DynamicNav />}
+      </div>
+      {/* DynamicNav has to be used together with DynamicUserProfile */}
+      <DynamicUserProfile />
+    </>
+  );
+};
+
+const App = () => {
+  const { user } = useDynamicContext();
+  const isAuthorized = !!user;
+  return isAuthorized ? <AuthorizedUserView /> : <AuthorizationView />;
+};
+
+createRoot(document.getElementById("root")).render(
+  <DynamicContextProvider
+    settings={{
+      environmentId: "<<sandboxenvironmentid>>",
+    }}
+  >
+    <App />
+  </DynamicContextProvider>
+);
+```

@@ -190,6 +190,73 @@
           ]
         }
       ]
+    },
+    {
+      "group": "SDK-React",
+      "pages": [
+        "sdk-react/overview",
+        {
+          "group": "Components",
+          "pages": [
+            "sdk-react/components/dynamiccontextprovider",
+            "sdk-react/components/dynamicconnectbutton",
+            "sdk-react/components/dynamicwidget",
+            "sdk-react/components/dynamicuserprofile",
+            "sdk-react/components/dynamicnav",
+            "sdk-react/components/dynamicwagmiconnector"
+          ]
+        },
+        {
+          "group": "Hooks",
+          "pages": [
+            "sdk-react/hooks/usedynamiccontext",
+            "sdk-react/hooks/usewalletitemactions",
+            "sdk-react/hooks/useauthenticateconnecteduser",
+            "sdk-react/hooks/useuserupdaterequest",
+            "sdk-react/hooks/useemailverificationrequest",
+            "sdk-react/hooks/usesendbalance"
+          ]
+        },
+        {
+          "group": "Utilities",
+          "pages": [
+            "sdk-react/utilities/getauthtoken",
+            "sdk-react/utilities/getnetwork"
+          ]
+        },
+        {
+          "group": "Callbacks",
+          "pages": [
+            "sdk-react/callbacks/onauthflowclose",
+            "sdk-react/callbacks/onauthflowopen",
+            "sdk-react/callbacks/onauthsuccess",
+            "sdk-react/callbacks/onconnectsuccess",
+            "sdk-react/callbacks/onlinksuccess",
+            "sdk-react/callbacks/onlogout",
+            "sdk-react/callbacks/onunlinksuccess",
+            "sdk-react/callbacks/onuserprofileupdate"
+          ]
+        },
+        {
+          "group": "Examples",
+          "pages": [
+            "sdk-react/examples/get-balance",
+            "sdk-react/examples/get-balance-for-all-wallets",
+            "sdk-react/examples/sign-a-message",
+            "sdk-react/examples/get-the-users-profile"
+          ]
+        },
+        {
+          "group": "Object Reference",
+          "pages": [
+            "sdk-react/object-reference/walletconnector",
+            "sdk-react/object-reference/wallet",
+            "sdk-react/object-reference/userprofile",
+            "sdk-react/object-reference/jwt-payload",
+            "sdk-react/object-reference/jwtverifiedcredential"
+          ]
+        }
+      ]
     }
   ],
   "footerSocials": {

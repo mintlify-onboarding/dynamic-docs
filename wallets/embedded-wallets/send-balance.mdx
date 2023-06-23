@@ -1,0 +1,63 @@
+---
+title: "Send Balance"
+description: "Dynamic Send Balance Widget allows users to send their funds to another wallet when using an embedded wallet. Users using embedded wallets will automatically have a send button in the dynamic widget, or you can trigger the same UI from your website using our `useSendBalance` hook."
+---
+
+## DynamicWidget usage
+
+If your website is using the Dynamic Widget, the send button will be automatically available for users using embedded wallets. When a user opens the Dynamic Widget and selects an email based wallet, for example, the `Send` button will appear for them.
+
+## useSendBalance hook
+
+In case you need to programmatically open the send balance widget, you can use our useSendBalance hook to request the UI and optionally prepopulate the form for the user.
+
+### How it works
+
+The useSendBalance hook depends on the DynamicContextProvider, so it has to be used as a child of the Dynamic context. When you use the hook, you will get a function named `open`. That method accepts the follow options:
+
+| Parameter        | Type             | Description                    |
+| ---------------- | ---------------- | ------------------------------ |
+| recipientAddress | String           | The initial recipient address  |
+| value            | ethers.BigNumber | The initial transaction amount |
+
+The `open` function will return a promise; If successful, the promise will be resolved with the transaction; if not successful, the promise will be rejected accompanied by the error collected from the provider.
+
+Here is an example of a custom Send button
+
+```typescript
+import { useSendBalance } from "@dynamic-labs/sdk-react";
+
+const MySendButton = () => {
+  const { open } = useSendBalance();
+
+  return <button onClick={() => open()}>Send</button>;
+};
+```
+
+From this example, when the user clicks the button, they will be prompted to fill the amount and recipient fields, review the transaction, and they will see a confirmation at the end of the flow.
+
+For the second example, we will pre-populate the recipient and amount fields for the user.
+
+```typescript
+import { useSendBalance } from "@dynamic-labs/sdk-react";
+import { ethers } from "ethers";
+
+const MySendButton = () => {
+  const { open } = useSendBalance();
+
+  const onCickSend = async () => {
+    try {
+      const tx = await open({
+        recipientAddress: "<address>",
+        value: ethers.utils.parseEther("1"),
+      });
+    } catch (err) {
+      // Handle the promise rejection
+    }
+  };
+
+  return <button onClick={onCickSend}>Send</button>;
+};
+```
+
+Here, when the user clicks the button, they will be prompted with the same UI, but now it will be pre-populated with the recipient address and amount.

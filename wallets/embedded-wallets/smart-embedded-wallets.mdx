@@ -1,0 +1,29 @@
+---
+title: "Smart Embedded Wallets (Closed Alpha)"
+---
+
+<Note>
+  Smart embedded wallets (account abstraction) is a closed alpha feature. To get
+  early access, email us at hello@dynamic.xyz or join our slack community.
+</Note>
+
+Dynamic offers a flexible [embedded wallet](/embedded-wallets/overview) solution, allowing you to spin up wallets for customers who do not yet have one. Those can be simple EOA wallets, or by leveraging our joint solution with [ZeroDev](https://zerodev.app/), can become smart contract wallets, leveraging [EIP-4337](https://eips.ethereum.org/EIPS/eip-4337) (Account abstraction).
+
+## What can you do with a smart contract wallet?
+
+Smart wallets offer a myriad of benefits. Three specific ones are:
+
+1. **Gas fee sponsorship** - you can choose to allow your users to conduct “gasless” transactions that will be sponsored by you (currently supported)
+2. **Transaction bundling** - you can collect a single signature which is used for a bundle of transactions vs having to ask a user for signature on every independent action (future release)
+3. **Sophisticated recovery and transfer options** - because the wallet is a smart contract, you can define sophisticated recovery methods for the wallet signer, as well as options to transfer ownership from one private key owner to another. (future release)
+4. **Session keys** - you can create session keys with permissions to send specific transactions for your users, so that you can execute transactions without asking your users to sign, and even execute transactions while they are offline (future release)
+
+## How does smart wallet creation work?
+
+Once a user logs in with email and an embedded wallet is created for them, a key pair is generated for that wallet. The key pair is then used to generate a smart contract wallet that uses the private key as the owner. In essence, you use the private key from the embedded wallet to control a more sophisticated smart wallet.
+
+The resulting wallet is returned as a provider, and can be interacted with in a similar way to an EOA, with the flexibility to define things such as gas sponsorship as part of the wallet initiation.
+
+## Getting started
+
+Please reach out to us for early access to the Smart embedded wallet feature. You can [email us](mailto:hello@dynamic.xyz) or join our [slack community](https://www.dynamic.xyz/slack).

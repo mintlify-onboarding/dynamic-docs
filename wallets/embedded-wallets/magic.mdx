@@ -1,0 +1,71 @@
+---
+title: "Magic"
+---
+
+<Warning>
+    **🚧 If you are using package splitting, ensure you include the magic package**
+
+    If you are using [package splitting](/quickstart-and-tutorials/tutorials/modular-sdk), ensure you are including the `@dynamic-labs/magic `package and exporting `MagicWalletConnectors`.
+
+</Warning>
+
+## Summary
+
+Using Dynamic and Magic wallets together will allow your users to log in with either email or social while a wallet is created in the background, creating a user friendly option for non-web 3 native users. To learn more about Magic, see their website [here](https://magic.link/docs/home/welcome).
+
+## Usage
+
+To add magic wallets to your sign up flow:
+
+1. Go to [Magic](https://magic.link/) and sign up
+2. Create a **Magic Auth** app
+3. Click into the new Magic Auth app and verify you have access to your app credentials. You can find your publishable API key and secret key on in the home page of your Magic Auth project
+   1. Keep these close by since you'll need to copy them into the Dynamic Dashboard
+
+## Enable Email sign up
+
+1. Go to your [Configurations](https://app.dynamic.xyz/dashboard/configurations) page in the Dynamic Dashboard
+2. Open the `Sign up with Email or Social` card
+3. Toggle on `Enable Email Sign + Magic.link`
+   1. Add your Magic Auth credentials
+   2. Select your preferred default network
+      1. If you have more than 1 supported EVM network, click on the dropdown and select the network that Magic should use to generate the wallet. This is a Magic requirement to set up a wallet, but worry not, your users will be able to switch networks after logging in.
+   3. Press save
+
+## Enable Social Sign in
+
+> 📘 Social sign in is currently available on v17 RC07+
+>
+> If you want to get early access to this feature, reach out to us in our [Community Slack Channel](https://docs.dynamic.xyz/docs/support-1).
+
+1. To enable social sign in:
+   1. You'll first need to setup your social oauth credentials in the **[Magic dashboard](https://dashboard.magic.link/)**.
+      1. To learn more about how to do so, see the Magic documentation. Here is a link to their [Google example](https://magic.link/docs/auth/login-methods/social-logins/integration/social-providers/google).
+   2. Now that your social apps are setup in Magic, you can now go to the Dynamic Dashboard and simply toggle them on.
+      1. Only toggle on social apps that are configured in Magic. If you toggle on a social app that is not properly configured in Magic, then users will hit an error state.
+      2. Ensure you test the connection in Magic before enabling in the Dynamic dashboard.
+
+## Use the wallets
+
+For users that sign up with these wallets in the background, you will be to access these wallets as you would any other wallet.
+
+<Warning>
+    **🚧 signTransaction is an unsupported method**
+
+    signTransaction is an unsupported method with MagicAuth. Make sure to use either the sendTransaction or signMessage methods.
+
+</Warning>
+
+## Exporting Private Keys
+
+Magic supports the export of users private keys by creating a reveal site where your users can log in using the same login methods as your app.
+
+This website is created on demand, so we recommend you reach out to them by using the chat widget in the bottom-right corner of the [documentation page](https://magic.link/docs/home/welcome) with the following information:
+
+1. Your API key (starts with pk_live)
+2. Your logo
+3. The list login methods you offer
+4. A list of blockchains you are using
+5. Your app name for the endpoint, such as [https://reveal.magic.link/your-app-name]()
+
+Check out the sample reveal site [here](https://reveal.magic.link/dynamic) for reference.

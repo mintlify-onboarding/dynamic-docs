@@ -129,7 +129,7 @@
           ]
         },
         {
-          "group": "Introduction",
+          "group": "Embedded Wallets",
           "pages": [
             "wallets/embedded-wallets/overview",
             "wallets/embedded-wallets/magic",
@@ -137,6 +137,14 @@
             "wallets/embedded-wallets/send-balance"
           ]
         }
+      ]
+    },
+    {
+      "group": "Chains & Networks",
+      "pages": [
+        "chains-and-networks/configure-in-dashboard",
+        "chains-and-networks/custom-networks",
+        "chains-and-networks/rpc-urls"
       ]
     }
   ],

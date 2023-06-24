@@ -294,13 +294,13 @@
         {
           "group": "Gates",
           "pages": [
-            "api-reference/gates/gets-the-gates-for-the-environment",
-            "api-reference/gates/creates-a-new-gate-for-the-project-environment",
-            "api-reference/gates/gets-a-gate",
-            "api-reference/gates/updates-a-gate",
-            "api-reference/gates/delete-a-gate",
-            "api-reference/gates/enable-the-gate-for-the-environment",
-            "api-reference/gates/disable-the-gate-for-the-environment"
+            "api-reference/Gates/Get-the-gates-for-an-environment",
+            "api-reference/Gates/Creates-a-new-gate-for-the-project-environment",
+            "api-reference/Gates/Gets-a-gate",
+            "api-reference/Gates/Updates-a-gate",
+            "api-reference/Gates/Delete-a-gate",
+            "api-reference/Gates/Enable-the-gate-for-the-environment",
+            "api-reference/Gates/Disable-the-gate-for-the-environment"
           ]
         },
         {

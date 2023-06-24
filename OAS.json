@@ -1,0 +1,4675 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Dashboard API",
+    "description": "Dashboard API documentation",
+    "version": "1.0.0"
+  },
+  "servers": [
+    { "url": "https://app.dynamic.xyz/api/v0" },
+    { "url": "http://localhost:3333/api/v0" }
+  ],
+  "tags": [
+    { "name": "Analytics" },
+    { "name": "SDK" },
+    { "name": "Organizations" },
+    { "name": "Projects" },
+    { "name": "Environments" },
+    { "name": "Users" },
+    { "name": "Invites" },
+    { "name": "Tokens" },
+    { "name": "Origins" },
+    { "name": "Allowlists" },
+    { "name": "Wallets" },
+    { "name": "Members" },
+    { "name": "Sessions" },
+    { "name": "Settings" },
+    { "name": "Gates" }
+  ],
+  "paths": {
+    "/environments/{environmentId}/gates": {
+      "get": {
+        "operationId": "getEnvironmentGates",
+        "tags": ["Gates"],
+        "summary": "Get the gates for an environment",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "200": {
+            "description": "List of gates for this project environment",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/GatesResponse" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      },
+      "post": {
+        "operationId": "createGate",
+        "tags": ["Gates"],
+        "summary": "Creates a new gate for the project environment",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GateCreateRequest" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully created",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Gate" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/gates/{gateId}": {
+      "get": {
+        "operationId": "getGate",
+        "tags": ["Gates"],
+        "summary": "Gets a gate",
+        "parameters": [{ "$ref": "#/components/parameters/gateId" }],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Gate" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      },
+      "put": {
+        "operationId": "updateGate",
+        "tags": ["Gates"],
+        "summary": "Updates a gate",
+        "parameters": [{ "$ref": "#/components/parameters/gateId" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GateUpdateRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Gate" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      },
+      "delete": {
+        "operationId": "deleteGate",
+        "tags": ["Gates"],
+        "summary": "Delete a gate",
+        "parameters": [{ "$ref": "#/components/parameters/gateId" }],
+        "responses": {
+          "204": { "description": "successful operation" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/gates/{gateId}/enable": {
+      "put": {
+        "summary": "Enable the gate for the environment",
+        "operationId": "enableGate",
+        "tags": ["Gates"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/gateId" }],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Gate" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/gates/{gateId}/disable": {
+      "put": {
+        "summary": "Disable the gate for the environment",
+        "operationId": "disableGate",
+        "tags": ["Gates"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/gateId" }],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Gate" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/environments/{environmentId}/settings/providers": {
+      "get": {
+        "operationId": "getEnvironmentProviders",
+        "tags": ["Settings"],
+        "summary": "Get the providers for an environment",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "200": {
+            "description": "List of providers for this project environment",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ProvidersResponse" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      },
+      "post": {
+        "operationId": "createProvider",
+        "tags": ["Settings"],
+        "summary": "Creates a new provider for the project environment",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ProviderCreateRequest" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully created",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Provider" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/environments/{environmentId}/settings/providers/urls": {
+      "get": {
+        "operationId": "getEnvironmentProviderUrls",
+        "tags": ["Settings"],
+        "summary": "Get the URLs for the environment providers",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "200": {
+            "description": "List of OAuth urls for the environment providers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProviderUrlsResponse"
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/settings/providers/{providerId}": {
+      "get": {
+        "operationId": "getProvider",
+        "tags": ["Settings"],
+        "summary": "Gets a provider",
+        "parameters": [{ "$ref": "#/components/parameters/providerId" }],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Provider" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      },
+      "put": {
+        "operationId": "updateProvider",
+        "tags": ["Settings"],
+        "summary": "Updates a provider",
+        "parameters": [{ "$ref": "#/components/parameters/providerId" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ProviderUpdateRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Provider" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      },
+      "delete": {
+        "operationId": "deleteProvider",
+        "tags": ["Settings"],
+        "summary": "Delete a provider by providerId",
+        "parameters": [{ "$ref": "#/components/parameters/providerId" }],
+        "responses": {
+          "204": { "description": "successful operation" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/settings/providers/{providerId}/enable": {
+      "put": {
+        "summary": "Enable the provider for the environment",
+        "operationId": "enableProvider",
+        "tags": ["Settings"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/providerId" }],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Provider" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/settings/providers/{providerId}/disable": {
+      "put": {
+        "summary": "Disable the provider for the environment",
+        "operationId": "disableProvider",
+        "tags": ["Settings"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/providerId" }],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Provider" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/environments/{environmentId}/analytics/wallets": {
+      "get": {
+        "operationId": "getWalletsBreakdown",
+        "description": "Fetch visit analytics",
+        "tags": ["Analytics"],
+        "parameters": [
+          { "$ref": "#/components/parameters/environmentId" },
+          {
+            "in": "query",
+            "name": "startDate",
+            "schema": { "type": "string" }
+          },
+          { "in": "query", "name": "endDate", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Wallets Breakdown by Date",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalyticsWalletsBreakdownResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/environments/{environmentId}/analytics/visits": {
+      "get": {
+        "operationId": "getVisitAnalytics",
+        "tags": ["Analytics"],
+        "parameters": [
+          { "$ref": "#/components/parameters/environmentId" },
+          {
+            "in": "query",
+            "name": "startDate",
+            "schema": { "type": "string" }
+          },
+          { "in": "query", "name": "endDate", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Analytics Visit Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalyticsVisitResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/organizations": {
+      "post": {
+        "operationId": "createOrganization",
+        "tags": ["Organizations"],
+        "summary": "Creates organization",
+        "requestBody": {
+          "description": "Organization data",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/OrganizationRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Organization response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "get": {
+        "operationId": "getOrganizationsForMember",
+        "tags": ["Organizations"],
+        "summary": "Fetches all the active organizations that the user has access to",
+        "responses": {
+          "200": {
+            "description": "successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationsResponse"
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/organizations/{organizationId}/billing/subscription": {
+      "get": {
+        "summary": "Find the subscription of an organization using its ID",
+        "operationId": "getBillingSubscriptionByOrganization",
+        "tags": ["Organizations"],
+        "parameters": [{ "$ref": "#/components/parameters/organizationId" }],
+        "responses": {
+          "200": {
+            "description": "Details of the organziation's current subscription",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BillingSubscription" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "description": "Not found" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/organizations/{organizationId}/billing/upgrade": {
+      "put": {
+        "summary": "Upgrade organziation to advanced plan",
+        "operationId": "upgradeSubscriptionForOrganization",
+        "tags": ["Organizations"],
+        "parameters": [{ "$ref": "#/components/parameters/organizationId" }],
+        "responses": {
+          "201": {
+            "description": "Details of the organziation's current subscription",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BillingSubscription" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "description": "Not found" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/organizations/{organizationId}": {
+      "get": {
+        "summary": "Find an organization by ID",
+        "operationId": "getOrganizationById",
+        "tags": ["Organizations"],
+        "parameters": [{ "$ref": "#/components/parameters/organizationId" }],
+        "responses": {
+          "200": {
+            "description": "Organization response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Organization" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "description": "Not found" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "summary": "Update an organization by ID",
+        "operationId": "updateOrganizationById",
+        "tags": ["Organizations"],
+        "parameters": [{ "$ref": "#/components/parameters/organizationId" }],
+        "requestBody": {
+          "description": "User new fields data",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/OrganizationFields" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation - organization fields updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "summary": "Deletes an organization by ID",
+        "operationId": "deleteOrganizationById",
+        "tags": ["Organizations"],
+        "parameters": [{ "$ref": "#/components/parameters/organizationId" }],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "204": { "description": "Delete successful" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/projects/{projectId}": {
+      "get": {
+        "summary": "Find an project by ID",
+        "operationId": "getProjectById",
+        "tags": ["Projects"],
+        "parameters": [{ "$ref": "#/components/parameters/projectId" }],
+        "responses": {
+          "200": {
+            "description": "Project response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Project" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "operationId": "updateProject",
+        "tags": ["Projects"],
+        "summary": "Update a project",
+        "parameters": [{ "$ref": "#/components/parameters/projectId" }],
+        "requestBody": {
+          "description": "Data to update a project",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateProjectRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation - project updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateProjectResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "summary": "Deletes a project by ID",
+        "operationId": "deleteProjectById",
+        "tags": ["Projects"],
+        "parameters": [{ "$ref": "#/components/parameters/projectId" }],
+        "responses": {
+          "204": { "description": "Delete successful" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/projects/{projectId}/docs": {
+      "get": {
+        "operationId": "getProjectDocsUrl",
+        "description": "Returns the personalized docs URL for the project",
+        "parameters": [{ "$ref": "#/components/parameters/projectId" }],
+        "tags": ["Projects"],
+        "responses": {
+          "200": {
+            "description": "Gets personalized doc url.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ProjectDocsResponse" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/organizations/{organizationId}/projects": {
+      "post": {
+        "operationId": "createProject",
+        "tags": ["Projects"],
+        "summary": "Creates a new project",
+        "parameters": [{ "$ref": "#/components/parameters/organizationId" }],
+        "requestBody": {
+          "description": "Data to create a new project",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ProjectRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation - project added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateProjectResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "get": {
+        "operationId": "getProjects",
+        "summary": "Fetches all the active projects the belong to the organization",
+        "tags": ["Projects"],
+        "parameters": [{ "$ref": "#/components/parameters/organizationId" }],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ProjectsResponse" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/environments/{environmentId}/integrations/chainalysis": {
+      "get": {
+        "summary": "Find the Chainalysis configuration for an environment.",
+        "operationId": "getChainalysisByEnvironmentId",
+        "tags": ["Chainalysis"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "200": {
+            "description": "Chainalysis Configuration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChainalysisConfiguration"
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "description": "Not Found" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/environments/{environmentId}/integrations/chainalysis/sanctions/enable": {
+      "put": {
+        "summary": "Enable the Sanctions API",
+        "operationId": "enableSanctionsApiByEnvironmentId",
+        "tags": ["Chainalysis"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChainalysisConfiguration"
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/environments/{environmentId}/integrations/chainalysis/sanctions/disable": {
+      "put": {
+        "summary": "Disables the Sanctions API",
+        "operationId": "disableSanctionsApiByEnvironmentId",
+        "tags": ["Chainalysis"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChainalysisConfiguration"
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/environments/{environmentId}": {
+      "get": {
+        "summary": "Find an environment by ID",
+        "operationId": "getEnvironmentById",
+        "tags": ["Environments"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "200": {
+            "description": "Environment response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ProjectEnvironment" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "description": "Not found" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "summary": "Deletes an environment by ID",
+        "operationId": "deleteEnvironmentById",
+        "tags": ["Environments"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "204": { "description": "Delete successful" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      },
+      "put": {
+        "operationId": "updateProjectSettings",
+        "tags": ["Environments"],
+        "summary": "Updates the environment settings",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ProjectSettings" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Project settings response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ProjectSettings" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/environments/{environmentId}/statistics/visitors": {
+      "get": {
+        "operationId": "getVisitorsCountByEnvironmentId",
+        "tags": ["Environments"],
+        "summary": "Get the unique number of visitors for an environment by environment ID",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "200": {
+            "description": "Environment Unique Visitor Count Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvironmentVisitorsResponse"
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/environments/{environmentId}/keys": {
+      "get": {
+        "operationId": "getKeysForEnvironment",
+        "tags": ["Environments"],
+        "summary": "Get keys for an environment given environmentId",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "200": {
+            "description": "Environment Key response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/KeyResponse" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "description": "Key not found" },
+          "500": { "description": "Error response" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/projects/{projectId}/environments": {
+      "get": {
+        "operationId": "getEnvironmentsByProjectId",
+        "tags": ["Environments"],
+        "summary": "Get Live and Sandbox environments by projectId",
+        "parameters": [{ "$ref": "#/components/parameters/projectId" }],
+        "responses": {
+          "200": {
+            "description": "Project environments response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvironmentsResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/sessions/{sessionId}/revoke": {
+      "put": {
+        "summary": "Revoke a session",
+        "operationId": "revokeSessionById",
+        "tags": ["Sessions"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/sessionId" }],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Session" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/users/{userId}/wallets": {
+      "get": {
+        "operationId": "getWalletsByUserId",
+        "tags": ["Wallets"],
+        "summary": "Get wallets by user",
+        "parameters": [{ "$ref": "#/components/parameters/userId" }],
+        "responses": {
+          "200": {
+            "description": "Successful response with list of wallets",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserWalletsResponse" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "description": "Not found" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/wallets/{walletId}": {
+      "get": {
+        "operationId": "getWalletById",
+        "tags": ["Wallets"],
+        "summary": "Get a wallet using the ID",
+        "parameters": [{ "$ref": "#/components/parameters/walletId" }],
+        "responses": {
+          "200": {
+            "description": "Successful response with wallet",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Wallet" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "description": "Not found" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "operationId": "deleteWalletById",
+        "tags": ["Wallets"],
+        "summary": "Delete wallet",
+        "parameters": [{ "$ref": "#/components/parameters/walletId" }],
+        "responses": {
+          "204": { "description": "successful operation" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/users/{userId}": {
+      "put": {
+        "operationId": "updateUser",
+        "tags": ["Users"],
+        "summary": "Update a user",
+        "parameters": [{ "$ref": "#/components/parameters/userId" }],
+        "requestBody": {
+          "description": "User new fields data",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/InternalUserFields" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response of a user",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserResponse" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "get": {
+        "operationId": "getUser",
+        "tags": ["Users"],
+        "summary": "Get a user by Id",
+        "parameters": [{ "$ref": "#/components/parameters/userId" }],
+        "responses": {
+          "200": {
+            "description": "Successful response of a user",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserResponse" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "description": "Not found" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "operationId": "deleteUser",
+        "tags": ["Users"],
+        "summary": "Delete user",
+        "parameters": [{ "$ref": "#/components/parameters/userId" }],
+        "responses": {
+          "204": { "description": "successful operation" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/environments/{environmentId}/users": {
+      "post": {
+        "operationId": "createUser",
+        "summary": "Creates a new user",
+        "tags": ["Users"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "requestBody": {
+          "description": "User new fields data",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserFields" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully created new user",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UserResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "get": {
+        "operationId": "getEnvironmentUsers",
+        "tags": ["Users"],
+        "summary": "Get all users for an environment",
+        "parameters": [
+          { "$ref": "#/components/parameters/environmentId" },
+          {
+            "in": "query",
+            "name": "filter",
+            "required": false,
+            "style": "form",
+            "schema": { "$ref": "#/components/schemas/UserSearchFilterParams" }
+          },
+          {
+            "in": "query",
+            "name": "orderBy",
+            "required": false,
+            "schema": { "$ref": "#/components/schemas/orderBy" }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": { "type": "integer", "minimum": 0, "default": 0 },
+            "description": "The number of items to skip before starting to collect the result set",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "description": "The numbers of items to return",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of users",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UsersResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/environments/{environmentId}/visitors": {
+      "get": {
+        "operationId": "getEnvironmentVisitors",
+        "tags": ["Visits"],
+        "summary": "Get all visitors for an environment",
+        "parameters": [
+          { "$ref": "#/components/parameters/environmentId" },
+          {
+            "in": "query",
+            "name": "filter",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "$ref": "#/components/schemas/VisitorSearchFilterParams"
+            }
+          },
+          {
+            "in": "query",
+            "name": "orderBy",
+            "required": false,
+            "schema": { "$ref": "#/components/schemas/orderBy" }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": { "type": "integer", "minimum": 0, "default": 0 },
+            "description": "The number of items to skip before starting to collect the result set",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "description": "The numbers of items to return",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of visitors",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/VisitorsResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/members/{memberId}": {
+      "delete": {
+        "operationId": "deleteMemberById",
+        "summary": "Delete user membership from being an admin of an organization",
+        "tags": ["Members"],
+        "parameters": [{ "$ref": "#/components/parameters/memberId" }],
+        "responses": {
+          "204": { "description": "successful operation" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/organizations/{organizationId}/members": {
+      "get": {
+        "operationId": "getOrganizationMembers",
+        "tags": ["Members"],
+        "summary": "Get all users that are admins for an organization",
+        "parameters": [{ "$ref": "#/components/parameters/organizationId" }],
+        "responses": {
+          "200": {
+            "description": "List of members for the organization",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationMembersResponse"
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/invites": {
+      "get": {
+        "operationId": "getInvites",
+        "tags": ["Invites"],
+        "summary": "Get all the user invites",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "status",
+            "schema": { "$ref": "#/components/schemas/InviteStatusEnum" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of invites by query params",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/InvitesResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/invites/{inviteId}": {
+      "put": {
+        "operationId": "updateInvite",
+        "tags": ["Invites"],
+        "summary": "Update invite for user (accept/reject)",
+        "parameters": [{ "$ref": "#/components/parameters/inviteId" }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/InviteUpdateRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": { "description": "Invite updated" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "description": "not found" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/organizations/{organizationId}/invites": {
+      "post": {
+        "operationId": "createInvite",
+        "summary": "Creates an invite to the organization",
+        "tags": ["Invites"],
+        "parameters": [{ "$ref": "#/components/parameters/organizationId" }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/InviteSendRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": { "description": "Invite created" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "409": {
+            "description": "Conflict - already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InviteConflictResponse"
+                }
+              }
+            }
+          },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "get": {
+        "summary": "Fetches all the Invites the belong to the organization",
+        "operationId": "getOrganizationInvitesByOrganizationId",
+        "tags": ["Invites"],
+        "parameters": [{ "$ref": "#/components/parameters/organizationId" }],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/InvitesResponse" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "description": "Not found" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/environments/{environmentId}/origins": {
+      "get": {
+        "operationId": "getOrigins",
+        "tags": ["Origins"],
+        "summary": "Get all the allowed origins for a project environment",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "200": {
+            "description": "List of allowed origins for this project environment",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/OriginsResponse" }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/text": { "schema": { "type": "string" } }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      },
+      "post": {
+        "operationId": "addOrigin",
+        "tags": ["Origins"],
+        "summary": "Adds an allowed origin for this project environment",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "requestBody": {
+          "description": "Fields necessary to add an origin",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "origin": { "$ref": "#/components/schemas/origin" }
+                },
+                "required": ["origin"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Origin was added successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "origin": { "$ref": "#/components/schemas/OriginResponse" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": { "type": "string" },
+                    "status": { "type": "number" }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/text": { "schema": { "type": "string" } }
+            }
+          },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/origins/{originId}": {
+      "delete": {
+        "operationId": "deleteOriginById",
+        "tags": ["Origins"],
+        "summary": "Delete a origin by id",
+        "parameters": [{ "$ref": "#/components/parameters/originId" }],
+        "responses": {
+          "204": { "description": "successful operation" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/environments/{environmentId}/tokens": {
+      "get": {
+        "operationId": "getTokens",
+        "tags": ["Tokens"],
+        "summary": "Get all the tokens for a project environment (does not include the raw token)",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "200": {
+            "description": "List of tokens",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/TokensResponse" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "operationId": "postToken",
+        "tags": ["Tokens"],
+        "summary": "Create a new API Token",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "requestBody": {
+          "description": "Fields necessary to create a new token",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PostTokenFields" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The token that has been created, including the plaintext of the token",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CreateTokenResponse" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/environments/{environmentId}/tokens/{tokenId}": {
+      "delete": {
+        "operationId": "deleteTokenById",
+        "tags": ["Tokens"],
+        "summary": "Delete a token by token id",
+        "parameters": [
+          { "$ref": "#/components/parameters/environmentId" },
+          { "$ref": "#/components/parameters/tokenId" }
+        ],
+        "responses": {
+          "204": { "description": "successful operation" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "description": "Not found" },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/environments/{environmentId}/allowlists": {
+      "get": {
+        "summary": "Get all allowlists for a environment",
+        "operationId": "getAllowlistsByEnvironmentId",
+        "tags": ["Allowlists"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "200": {
+            "description": "Get allowlists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Allowlist" }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      },
+      "post": {
+        "summary": "Create new allowlist for a environment",
+        "operationId": "createAllowlistByEnvironmentId",
+        "tags": ["Allowlists"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "requestBody": {
+          "description": "Fields necessary to create a new allowlist",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PostAllowlistsRequest" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Allowlist" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/allowlists/{allowlistId}": {
+      "get": {
+        "summary": "Get allowlist by id",
+        "operationId": "getAllowlistsById",
+        "tags": ["Allowlists"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/allowlistId" }],
+        "responses": {
+          "200": {
+            "description": "Get allowlist",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Allowlist" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      },
+      "delete": {
+        "summary": "Delete an allowlist",
+        "operationId": "deleteAllowlistById",
+        "tags": ["Allowlists"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/allowlistId" }],
+        "responses": {
+          "204": { "description": "Successfully deleted" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/allowlists/{allowlistId}/enable": {
+      "put": {
+        "summary": "Enable the allowlist",
+        "operationId": "enableAllowlistById",
+        "tags": ["Allowlists"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/allowlistId" }],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Allowlist" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/allowlists/{allowlistId}/disable": {
+      "put": {
+        "summary": "Disable the allow list",
+        "operationId": "disableAllowlistById",
+        "tags": ["Allowlists"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/allowlistId" }],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Allowlist" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/allowlists/{allowlistId}/entries": {
+      "get": {
+        "summary": "Get all entries for an allowlist",
+        "operationId": "getEntriesByAllowlistId",
+        "tags": ["Allowlists"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "$ref": "#/components/parameters/allowlistId" },
+          {
+            "in": "query",
+            "name": "orderBy",
+            "required": false,
+            "schema": { "$ref": "#/components/schemas/orderBy" }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": { "type": "integer", "minimum": 0, "default": 0 },
+            "description": "The number of items to skip before starting to collect the result set",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "description": "The numbers of items to return",
+            "required": false
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Keywords to search for in alias or walletPublicKey",
+            "required": false,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get allowlist entries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AllowlistEntriesResponse"
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      },
+      "post": {
+        "summary": "Create a new entry for an allowlist",
+        "operationId": "postEntryByAllowlistId",
+        "tags": ["Allowlists"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/allowlistId" }],
+        "requestBody": {
+          "description": "Fields necessary to create a new allowlist entry",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostAllowlistEntriesRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AllowlistEntry" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/allowlistEntries/{allowlistEntryId}": {
+      "delete": {
+        "summary": "Delete an allowlist entry",
+        "operationId": "deleteAllowlistEntryById",
+        "tags": ["Allowlists"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [{ "$ref": "#/components/parameters/allowlistEntryId" }],
+        "responses": {
+          "204": { "description": "Successfully deleted" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/providers/{providerType}/login": {
+      "options": {
+        "operationId": "oauthLoginOptions",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [
+          { "$ref": "#/components/parameters/environmentId" },
+          { "$ref": "#/components/parameters/providerType" }
+        ],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "get": {
+        "operationId": "oauthLogin",
+        "tags": ["SDK"],
+        "summary": "Get redirect URL for Oauth provider login",
+        "parameters": [
+          { "$ref": "#/components/parameters/environmentId" },
+          { "$ref": "#/components/parameters/providerType" }
+        ],
+        "responses": {
+          "302": {
+            "description": "Redirect",
+            "headers": { "Location": { "schema": { "type": "string" } } }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/providers/{providerType}/redirect": {
+      "options": {
+        "operationId": "oauthRedirectOptions",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [
+          { "$ref": "#/components/parameters/environmentId" },
+          { "$ref": "#/components/parameters/providerType" }
+        ],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "get": {
+        "operationId": "oauthRedirectCode",
+        "tags": ["SDK"],
+        "summary": "Hacky endpoint to get the code",
+        "parameters": [
+          { "$ref": "#/components/parameters/environmentId" },
+          { "$ref": "#/components/parameters/providerType" },
+          {
+            "in": "query",
+            "name": "code",
+            "allowReserved": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "in": "query",
+            "name": "scope",
+            "allowReserved": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "in": "query",
+            "name": "authuser",
+            "allowReserved": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "in": "query",
+            "name": "prompt",
+            "allowReserved": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": { "text/html": { "schema": { "type": "string" } } }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/providers/{providerType}/verify": {
+      "options": {
+        "operationId": "oauthVerifyOptions",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [
+          { "$ref": "#/components/parameters/environmentId" },
+          { "$ref": "#/components/parameters/providerType" }
+        ],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "post": {
+        "operationId": "oauthVerify",
+        "tags": ["SDK"],
+        "summary": "Standard OAuth verify callback to exchange temproary code for oauth access",
+        "parameters": [
+          { "$ref": "#/components/parameters/environmentId" },
+          { "$ref": "#/components/parameters/providerType" }
+        ],
+        "requestBody": {
+          "description": "OAuth temporary auth code",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/OauthRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/VerifyResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/nonce": {
+      "options": {
+        "operationId": "nonceOptions",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "get": {
+        "operationId": "getNonce",
+        "tags": ["SDK"],
+        "summary": "Creates a nonce for the authentication flow",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "200": {
+            "description": "Nonce response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/NonceResponse" }
+              }
+            }
+          },
+          "500": { "description": "Error response" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/events": {
+      "options": {
+        "operationId": "eventsOptions",
+        "tags": ["SDK"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "post": {
+        "operationId": "publishEvent",
+        "tags": ["SDK"],
+        "summary": "Publish events for SDK",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "requestBody": {
+          "description": "Event Message",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PublishEvents" }
+            }
+          }
+        },
+        "responses": {
+          "204": { "description": "Successful response" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "description": "Environment not found" },
+          "500": { "description": "Error response" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/settings": {
+      "options": {
+        "operationId": "settingsOptions",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "get": {
+        "operationId": "getEnvironmentSettings",
+        "tags": ["SDK"],
+        "summary": "Get the environment's settings",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "200": {
+            "description": "Project settings response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ProjectSettings" }
+              }
+            }
+          },
+          "404": { "description": "Environment not found" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/verify/link": {
+      "options": {
+        "operationId": "verifyLinkOptions",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "post": {
+        "operationId": "verifyLink",
+        "summary": "Link a wallet to a valid environment user, and return an updated JWT",
+        "security": [{ "bearerAuth": [] }],
+        "tags": ["SDK"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "requestBody": {
+          "description": "Verification data",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/VerifyRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful link",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/VerifyResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenWithErrorAndPayload"
+          },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/verify/transfer": {
+      "options": {
+        "operationId": "verifyTransferOptions",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "post": {
+        "operationId": "verifyTransfer",
+        "summary": "This is a subsequent call to link a wallet after user has confirmed transfer to the new account",
+        "security": [{ "bearerAuth": [] }],
+        "tags": ["SDK"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "requestBody": {
+          "description": "Verification data",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/VerifyRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful link",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/VerifyResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenWithErrorAndPayload"
+          },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/revoke": {
+      "options": {
+        "operationId": "revokeSessionOption",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "post": {
+        "operationId": "revokeSession",
+        "summary": "Revoke a session from the SDK environment",
+        "security": [{ "bearerAuth": [] }],
+        "tags": ["SDK"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Successful empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenWithErrorAndPayload"
+          },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/verify/unlink": {
+      "options": {
+        "operationId": "verifyUnlinkOptions",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "post": {
+        "operationId": "verifyUnlink",
+        "summary": "Remove a link from to a valid environment user, and return an updated JWT",
+        "security": [{ "bearerAuth": [] }],
+        "tags": ["SDK"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "requestBody": {
+          "description": "Verification data",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/VerifyUnlinkRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful link",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/VerifyResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenWithErrorAndPayload"
+          },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/prefetch": {
+      "options": {
+        "operationId": "verifyPrefetch",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "description": "Environment not found" }
+        }
+      },
+      "post": {
+        "operationId": "prefetch",
+        "tags": ["SDK"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "summary": "Endpoint to send minimal wallet information to the API to prefetch name service information for an address.",
+        "requestBody": {
+          "description": "Prefetch data",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PrefetchRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": { "description": "Accepted" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "description": "Environment not found" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/connect": {
+      "options": {
+        "operationId": "optionsConnect",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "description": "Environment not found" }
+        }
+      },
+      "post": {
+        "operationId": "createVisit",
+        "tags": ["SDK"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "summary": "Endpoint to send minimal wallet information for a connect-only or connect-first visitor.",
+        "requestBody": {
+          "description": "Connected Visit data",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ConnectRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": { "description": "Accepted" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "description": "Environment not found" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/verify": {
+      "options": {
+        "operationId": "verifyOptions",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "post": {
+        "operationId": "verify",
+        "tags": ["SDK"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "summary": "Verifies payload and returns jwt",
+        "requestBody": {
+          "description": "Verification data",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/VerifyRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful verify response, that contains the encoded JWT as a string.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/VerifyResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenWithErrorAndPayload"
+          },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/users": {
+      "options": {
+        "operationId": "usersOptions",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "put": {
+        "operationId": "updateSelf",
+        "tags": ["SDK"],
+        "summary": "Update the user's fields",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "requestBody": {
+          "description": "User new fields data",
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserFields" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation - user fields updated",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UpdateSelfResponse" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/sdk/{environmentId}/networks": {
+      "options": {
+        "operationId": "networksOptions",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "get": {
+        "summary": "Find the configuration for the enabled networks associated to an environment",
+        "operationId": "getNetworksConfigurationByEnvId",
+        "tags": ["SDK"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "200": {
+            "description": "Networks configuration response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NetworkConfigurationResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": { "description": "Not found" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/onramps": {
+      "options": {
+        "operationId": "onrampsOptions",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "get": {
+        "summary": "Find the configuration for the enabled onramps associated to an environment",
+        "operationId": "getSupportedOnramps",
+        "tags": ["SDK"],
+        "parameters": [
+          { "$ref": "#/components/parameters/environmentId" },
+          {
+            "in": "query",
+            "name": "walletAddress",
+            "schema": { "type": "string" },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "chain",
+            "schema": { "type": "string" },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "networkId",
+            "schema": { "type": "string" },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "token",
+            "schema": { "type": "string" },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Supported onramps response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SupportedOnrampsResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "description": "Not found" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/emailVerifications/create": {
+      "options": {
+        "operationId": "createEmailVerificationOptions",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "post": {
+        "operationId": "createEmailVerification",
+        "tags": ["SDK"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "summary": "initializes the email verification process",
+        "requestBody": {
+          "description": "Email Verification data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailVerificationCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful response, that contains verification UUID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailVerificationCreateResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/emailVerifications/verify": {
+      "options": {
+        "operationId": "verifyEmailVerificationOptions",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "post": {
+        "operationId": "verifyEmailVerification",
+        "tags": ["SDK"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "security": [{ "bearerAuth": [] }],
+        "summary": "verify the email verification request",
+        "requestBody": {
+          "description": "Email Verification data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailVerificationVerifyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response, that contains verification UUID.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UpdateSelfResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/emailVerifications/signin": {
+      "options": {
+        "operationId": "signInWithEmailVerificationOptions",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "post": {
+        "operationId": "signInWithEmailVerification",
+        "tags": ["SDK"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "summary": "verify the email and sign in the user",
+        "requestBody": {
+          "description": "Email Verification data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailVerificationVerifyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/VerifyResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/emailVerifications/retry": {
+      "options": {
+        "operationId": "retryEmailVerificationOptions",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" }
+        }
+      },
+      "post": {
+        "operationId": "retryEmailVerification",
+        "tags": ["SDK"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "summary": "Sends a new code for the email verification flow",
+        "requestBody": {
+          "description": "Email Verification Id",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailVerificationRetryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful response, a new code has been set",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailVerificationCreateResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "422": { "$ref": "#/components/responses/UnprocessableEntity" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    },
+    "/sdk/{environmentId}/.well-known/jwks": {
+      "options": {
+        "operationId": "jwksOptions",
+        "tags": ["SDK"],
+        "summary": "Options call for this endpoint",
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "204": { "description": "Empty response" },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      },
+      "get": {
+        "summary": "Find the jwks for the public key for this environment",
+        "operationId": "getJwksByEnvironmentId",
+        "tags": ["SDK"],
+        "parameters": [{ "$ref": "#/components/parameters/environmentId" }],
+        "responses": {
+          "200": {
+            "description": "public key with standard jwks format",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/JwksResponse" }
+              }
+            }
+          },
+          "404": { "description": "Environment not found" },
+          "500": { "$ref": "#/components/responses/InternalServerError" }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "allowlistId": {
+        "name": "allowlistId",
+        "in": "path",
+        "description": "ID of the allowlist",
+        "required": true,
+        "schema": { "$ref": "#/components/schemas/uuid" }
+      },
+      "allowlistEntryId": {
+        "in": "path",
+        "name": "allowlistEntryId",
+        "required": true,
+        "description": "ID of the allowlist entry",
+        "schema": { "$ref": "#/components/schemas/uuid" }
+      },
+      "environmentId": {
+        "in": "path",
+        "name": "environmentId",
+        "required": true,
+        "description": "ID of the environment",
+        "schema": { "$ref": "#/components/schemas/uuid" }
+      },
+      "gateId": {
+        "in": "path",
+        "name": "gateId",
+        "required": true,
+        "description": "ID of the gate",
+        "schema": { "$ref": "#/components/schemas/uuid" }
+      },
+      "providerId": {
+        "in": "path",
+        "name": "providerId",
+        "required": true,
+        "description": "ID of the provider",
+        "schema": { "$ref": "#/components/schemas/uuid" }
+      },
+      "providerType": {
+        "in": "path",
+        "name": "providerType",
+        "required": true,
+        "description": "Type of external auth provider",
+        "schema": { "$ref": "#/components/schemas/ProviderEnum" }
+      },
+      "inviteId": {
+        "in": "path",
+        "name": "inviteId",
+        "required": true,
+        "description": "ID of the invite",
+        "schema": { "$ref": "#/components/schemas/uuid" }
+      },
+      "memberId": {
+        "in": "path",
+        "name": "memberId",
+        "required": true,
+        "description": "ID of the membership",
+        "schema": { "$ref": "#/components/schemas/uuid" }
+      },
+      "organizationId": {
+        "in": "path",
+        "name": "organizationId",
+        "required": true,
+        "description": "ID of organization",
+        "schema": { "$ref": "#/components/schemas/uuid" }
+      },
+      "originId": {
+        "name": "originId",
+        "in": "path",
+        "description": "ID of the origin",
+        "required": true,
+        "schema": { "$ref": "#/components/schemas/uuid" }
+      },
+      "projectId": {
+        "name": "projectId",
+        "in": "path",
+        "required": true,
+        "description": "ID of project",
+        "schema": { "$ref": "#/components/schemas/uuid" }
+      },
+      "sessionId": {
+        "name": "sessionId",
+        "in": "path",
+        "description": "ID of the session",
+        "required": true,
+        "schema": { "$ref": "#/components/schemas/uuid" }
+      },
+      "tokenId": {
+        "in": "path",
+        "name": "tokenId",
+        "required": true,
+        "description": "ID of the token",
+        "schema": { "$ref": "#/components/schemas/uuid" }
+      },
+      "userId": {
+        "in": "path",
+        "name": "userId",
+        "schema": { "$ref": "#/components/schemas/uuid" },
+        "required": true,
+        "description": "UUID of the user"
+      },
+      "walletId": {
+        "in": "path",
+        "name": "walletId",
+        "schema": { "$ref": "#/components/schemas/uuid" },
+        "required": true,
+        "description": "UUID of the wallet"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/BadRequest" }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Forbidden" }
+          }
+        }
+      },
+      "ForbiddenWithErrorAndPayload": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ForbiddenWithErrorAndPayload"
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/InternalServerError" }
+          }
+        }
+      },
+      "MethodNotAllowed": {
+        "description": "Method Not Allowed",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/MethodNotAllowed" }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Unauthorized" }
+          }
+        }
+      },
+      "UnprocessableEntity": {
+        "description": "Unprocessable Entity",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/UnprocessableEntity" }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "GateCreateRequest": {
+        "type": "object",
+        "description": "Request body to create a new gate. The gate will be not enabled by default.",
+        "required": ["name", "scope", "rules"],
+        "properties": {
+          "name": {
+            "description": "Human-readable name of the gate. This should be something helpful to organize gates.",
+            "example": "Super User Gate",
+            "type": "string"
+          },
+          "scope": {
+            "description": "String for the resulting scope of the gate. If the rules of the gate apply to the user being verified, then this scope will be surfaced in the JWT",
+            "example": "superuser",
+            "type": "string"
+          },
+          "rules": {
+            "type": "array",
+            "description": "The rules which will be used to evaluate users being verified. If multiple rules are present in a single gate, then all the rules need to apply for the user to gain the scope defined by the gate.",
+            "items": { "$ref": "#/components/schemas/GateRule" }
+          }
+        }
+      },
+      "GateUpdateRequest": {
+        "type": "object",
+        "description": "Request body to update an existing gate. This will not affect whether a gate is enabled or not.",
+        "properties": {
+          "name": {
+            "description": "Human-readable name of the gate. This should be something helpful to organize gates.",
+            "example": "Super User Gate",
+            "type": "string"
+          },
+          "scope": {
+            "description": "String for the resulting scope of the gate. If the rules of the gate apply to the user being verified, then this scope will be surfaced in the JWT",
+            "example": "superuser",
+            "type": "string"
+          },
+          "rules": {
+            "type": "array",
+            "description": "The rules which will be used to evaluate users being verified. If multiple rules are present in a single gate, then all the rules need to apply for the user to gain the scope defined by the gate.",
+            "items": { "$ref": "#/components/schemas/GateRule" }
+          }
+        }
+      },
+      "Gate": {
+        "type": "object",
+        "required": ["id", "name", "scope", "rules"],
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "name": {
+            "description": "Human-readable name of the gate. This should be something helpful to organize gates.",
+            "example": "Super User Gate",
+            "type": "string"
+          },
+          "scope": {
+            "description": "String for the resulting scope of the gate. If the rules of the gate apply to the user being verified, then this scope will be surfaced in the JWT",
+            "example": "superuser",
+            "type": "string"
+          },
+          "enabledAt": {
+            "type": "string",
+            "description": "If the gate is enabled, then this timestamp will be present.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "rules": {
+            "type": "array",
+            "description": "The rules which will be used to evaluate users being verified. If multiple rules are present in a single gate, then all the rules need to apply for the user to gain the scope defined by the gate.",
+            "items": { "$ref": "#/components/schemas/GateRule" }
+          }
+        }
+      },
+      "GateRule": {
+        "type": "object",
+        "description": "Definition for a single rule in a Gate. This will check for the presence of a token or NFT, given the contract address, in the wallet of a user being evaluated. For multi-wallet users, we will check all wallets. If a filter is defined, then we will also check that the filter checks apply to the user",
+        "required": ["type", "contractAddress"],
+        "properties": {
+          "type": { "$ref": "#/components/schemas/GateRuleType" },
+          "contractAddress": {
+            "description": "This contains the smart contract address of the token or NFT being used to evaluate users to be verified.",
+            "example": "0x0000000000000000000000000000000000001010",
+            "type": "string"
+          },
+          "filter": { "$ref": "#/components/schemas/GateRuleFilter" }
+        }
+      },
+      "GateRuleFilter": {
+        "type": "object",
+        "description": "Defines the filter properties used for the gate",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "Minimum token or NFT amount held by the user. If this `amount` field is provided, then Dynamic will also check that the user has this minimum amount held by the user of the NFT or Token"
+          }
+        }
+      },
+      "GateRuleType": { "type": "string", "enum": ["nft", "token"] },
+      "GatesResponse": {
+        "type": "object",
+        "properties": {
+          "providers": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Gate" }
+          }
+        }
+      },
+      "OauthProviderRequest": {
+        "type": "object",
+        "properties": {
+          "provider": { "$ref": "#/components/schemas/ProviderEnum" },
+          "accessToken": { "type": "string" },
+          "didToken": { "type": "string" }
+        }
+      },
+      "SocialSignInProvider": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "$ref": "#/components/schemas/SocialSignInProviderEnum"
+          },
+          "enabled": { "type": "boolean" }
+        }
+      },
+      "SocialSignInProviderEnum": {
+        "type": "string",
+        "enum": [
+          "apple",
+          "bitbucket",
+          "discord",
+          "facebook",
+          "github",
+          "gitlab",
+          "google",
+          "linkedin",
+          "microsoft",
+          "twitch",
+          "twitter"
+        ]
+      },
+      "NonEmptyString": {
+        "type": "string",
+        "pattern": "^.*\\S.*$",
+        "example": "An example name"
+      },
+      "OptionalNonEmptyString": {
+        "type": "string",
+        "pattern": "^$|^.*\\S.*$",
+        "example": "An example name"
+      },
+      "NonEmptyUrl": {
+        "type": "string",
+        "pattern": "^(https?:\\/\\/)?[a-z0-9]+([-.][a-z0-9]+)*\\.[a-z]{2,5}([0-9]{1,5})?(\\/.*)?$",
+        "example": "https://website-sample.com"
+      },
+      "OptionalNonEmptyUrl": {
+        "type": "string",
+        "pattern": "^$|^(https?:\\/\\/)?[a-z0-9]+([-.][a-z0-9]+)*\\.[a-z]{2,5}([0-9]{1,5})?(\\/.*)?$",
+        "example": "https://website-sample.com"
+      },
+      "WalletPublicKey": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9]{18,65}$",
+        "description": "Valid blockchain wallet address, must be an alphanumeric string without any special characters",
+        "example": "0xbF394748301603f18d953C90F0b087CBEC0E1834"
+      },
+      "DynamicJwt": {
+        "type": "object",
+        "required": [
+          "aud",
+          "iss",
+          "sub",
+          "sid",
+          "environment_id",
+          "missing_fields",
+          "verified_credentials",
+          "last_verified_credential_id"
+        ],
+        "properties": {
+          "kid": { "type": "string" },
+          "aud": { "type": "string" },
+          "iss": { "type": "string" },
+          "sub": { "type": "string" },
+          "exp": { "type": "number" },
+          "iat": { "type": "number" },
+          "sid": { "type": "string" },
+          "alias": { "type": "string" },
+          "blockchain_accounts": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/JwtBlockchainAccount" }
+          },
+          "country": { "type": "string" },
+          "email": { "type": "string", "format": "email" },
+          "environment_id": { "$ref": "#/components/schemas/uuid" },
+          "family_name": { "type": "string" },
+          "given_name": { "type": "string" },
+          "job_title": { "type": "string" },
+          "last_authenticated_account_id": {
+            "$ref": "#/components/schemas/uuid"
+          },
+          "lists": { "type": "array", "items": { "type": "string" } },
+          "phone_number": { "type": "string" },
+          "missing_fields": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ProjectSettingsKyc" }
+          },
+          "scope": {
+            "type": "string",
+            "description": "A whitespace-separate list of permissions associated with the JWT token issued. This conforms to the JWT standard for scope claims: https://datatracker.ietf.org/doc/html/rfc8693#section-4.2",
+            "example": "superuser marketing operations"
+          },
+          "t_shirt_size": { "type": "string" },
+          "team": { "type": "string" },
+          "username": { "type": "string" },
+          "policies_consent": { "type": "boolean" },
+          "verified_account": {
+            "$ref": "#/components/schemas/JwtBlockchainAccount"
+          },
+          "verified_credentials": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/JwtVerifiedCredential" }
+          },
+          "last_verified_credential_id": {
+            "$ref": "#/components/schemas/uuid"
+          },
+          "first_visit": { "type": "string", "format": "date-time" },
+          "last_visit": { "type": "string", "format": "date-time" },
+          "new_user": { "type": "boolean" },
+          "info": { "$ref": "#/components/schemas/JwtPayloadDeprecatedInfo" }
+        }
+      },
+      "JwtPayloadDeprecatedInfo": {
+        "type": "object",
+        "required": ["environmentId"],
+        "properties": {
+          "alias": { "type": "string" },
+          "chain": { "$ref": "#/components/schemas/ChainEnum" },
+          "email": { "type": "string", "format": "email" },
+          "ens": { "$ref": "#/components/schemas/NameServiceData" },
+          "environmentId": { "$ref": "#/components/schemas/uuid" },
+          "firstName": { "type": "string" },
+          "jobTitle": { "type": "string" },
+          "lastName": { "type": "string" },
+          "lists": { "type": "array", "items": { "type": "string" } },
+          "phoneNumber": { "type": "string" },
+          "tShirtSize": { "type": "string" },
+          "userId": { "$ref": "#/components/schemas/uuid" },
+          "username": { "type": "string" },
+          "wallet": { "type": "string" },
+          "walletPublicKey": { "$ref": "#/components/schemas/uuid" }
+        }
+      },
+      "JwtVerifiedCredentialFormatEnum": {
+        "type": "string",
+        "enum": ["blockchain", "email", "oauth"]
+      },
+      "JwtVerifiedCredential": {
+        "type": "object",
+        "required": ["id", "format"],
+        "properties": {
+          "address": { "$ref": "#/components/schemas/WalletPublicKey" },
+          "chain": { "type": "string" },
+          "refId": { "$ref": "#/components/schemas/uuid" },
+          "email": { "type": "string", "format": "email" },
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "name_service": { "$ref": "#/components/schemas/NameServiceData" },
+          "public_identifier": {
+            "description": "This is used to publicly identify a verified credential in a human-friendly way. For example, this will be the email address if credential format=email.",
+            "type": "string"
+          },
+          "wallet_name": { "type": "string" },
+          "wallet_provider": {
+            "$ref": "#/components/schemas/WalletProviderEnum"
+          },
+          "format": {
+            "$ref": "#/components/schemas/JwtVerifiedCredentialFormatEnum"
+          },
+          "oauth_provider": { "$ref": "#/components/schemas/ProviderEnum" },
+          "oauth_username": { "type": "string" },
+          "oauth_display_name": { "type": "string" },
+          "oauth_account_id": { "type": "string" },
+          "oauth_account_photos": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "oauth_emails": { "type": "array", "items": { "type": "string" } },
+          "previous_users": {
+            "description": "This will only be provided in the responses for GET /users/{userId}.Previous user IDs that owned this verified credential and was tranfered to the current user ID.",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/uuid" }
+          }
+        }
+      },
+      "JwtBlockchainAccount": {
+        "type": "object",
+        "required": [
+          "address",
+          "chain",
+          "id",
+          "wallet_name",
+          "wallet_provider"
+        ],
+        "properties": {
+          "address": { "$ref": "#/components/schemas/WalletPublicKey" },
+          "chain": { "type": "string" },
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "name_service": { "$ref": "#/components/schemas/NameServiceData" },
+          "wallet_name": { "type": "string" },
+          "wallet_provider": {
+            "$ref": "#/components/schemas/WalletProviderEnum"
+          }
+        }
+      },
+      "NameServiceData": {
+        "type": "object",
+        "properties": {
+          "avatar": { "type": "string" },
+          "name": { "type": "string" }
+        }
+      },
+      "JwksResponse": {
+        "type": "object",
+        "required": ["keys"],
+        "properties": {
+          "keys": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/JwksKey" }
+          }
+        }
+      },
+      "JwksKey": {
+        "type": "object",
+        "description": "Contains a valid JWKS representation of the public key for this environment. For more information, see: https://auth0.com/blog/navigating-rs256-and-jwks/",
+        "properties": {
+          "kid": { "type": "string" },
+          "alg": { "type": "string" },
+          "kty": { "type": "string" },
+          "use": { "type": "string" },
+          "e": { "type": "string" },
+          "n": { "type": "string" }
+        }
+      },
+      "PostAllowlistEntriesRequest": {
+        "type": "object",
+        "properties": {
+          "walletPublicKey": { "$ref": "#/components/schemas/WalletPublicKey" },
+          "email": { "$ref": "#/components/schemas/emailOrEmptyString" },
+          "alias": { "$ref": "#/components/schemas/OptionalNonEmptyString" }
+        }
+      },
+      "AllowlistEntry": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "allowListId": { "$ref": "#/components/schemas/uuid" },
+          "walletPublicKey": { "type": "string" },
+          "email": { "type": "string", "format": "email" },
+          "alias": { "type": "string" }
+        },
+        "required": ["id", "allowListId"]
+      },
+      "PostAllowlistsRequest": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/components/schemas/NonEmptyString" }
+        },
+        "required": ["name"]
+      },
+      "Allowlist": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "name": { "type": "string" },
+          "enabledAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "projectEnvironmentId": { "$ref": "#/components/schemas/uuid" }
+        },
+        "required": ["id", "name", "projectEnvironmentId"]
+      },
+      "EnvironmentVisitorsResponse": {
+        "type": "object",
+        "properties": {
+          "users": {
+            "type": "object",
+            "properties": { "count": { "type": "integer" } }
+          },
+          "visitors": {
+            "type": "object",
+            "properties": { "count": { "type": "integer" } }
+          }
+        }
+      },
+      "KeyResponse": {
+        "type": "object",
+        "properties": { "key": { "$ref": "#/components/schemas/Key" } }
+      },
+      "Key": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "publicKey": { "type": "string" }
+        }
+      },
+      "EncodedJwt": {
+        "type": "string",
+        "description": "Encoded JWT token",
+        "example": "jwt_value"
+      },
+      "VerifyResponse": {
+        "type": "object",
+        "required": ["jwt", "user"],
+        "properties": {
+          "jwt": { "$ref": "#/components/schemas/EncodedJwt" },
+          "user": { "$ref": "#/components/schemas/SdkUser" }
+        }
+      },
+      "EmailVerificationCreateResponse": {
+        "type": "object",
+        "properties": {
+          "verificationUUID": { "$ref": "#/components/schemas/uuid" },
+          "email": { "type": "string", "format": "email" }
+        },
+        "required": ["verificationUUID", "email"]
+      },
+      "EnvironmentsResponse": {
+        "type": "object",
+        "properties": {
+          "environments": {
+            "type": "object",
+            "properties": {
+              "live": { "$ref": "#/components/schemas/ProjectEnvironment" },
+              "sandbox": { "$ref": "#/components/schemas/ProjectEnvironment" }
+            },
+            "required": ["live", "sandbox"]
+          }
+        },
+        "required": ["environments"]
+      },
+      "NonceResponse": {
+        "type": "object",
+        "properties": { "nonce": { "type": "string" } }
+      },
+      "BadRequest": {
+        "type": "object",
+        "properties": { "error": { "type": "string" } }
+      },
+      "Unauthorized": {
+        "type": "object",
+        "properties": {
+          "error": { "type": "string", "example": "No jwt provided!" }
+        }
+      },
+      "Forbidden": {
+        "type": "object",
+        "properties": {
+          "error": { "type": "string", "example": "Access Forbidden" }
+        }
+      },
+      "UnprocessableEntity": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "Resources already exists for this Object"
+          },
+          "code": {
+            "$ref": "#/components/schemas/UnprocessableEntityErrorCode"
+          }
+        },
+        "required": ["error"]
+      },
+      "UnprocessableEntityErrorCode": {
+        "type": "string",
+        "enum": [
+          "email_already_exists",
+          "allowlist_already_exists",
+          "allowlist_entry_already_exists",
+          "reassign_wallet_error",
+          "reassign_wallet_confirm",
+          "members_cannot_delete_themself",
+          "username_already_exists",
+          "wrong_email_verification_token",
+          "invalid_email_verification",
+          "too_many_email_verification_attempts",
+          "organization_name_already_exists",
+          "project_name_already_exists",
+          "wallet_not_deployed",
+          "email_verification_required",
+          "invite_address_required",
+          "provider_not_available",
+          "invalid_unlink_request",
+          "too_many_api_tokens"
+        ]
+      },
+      "ForbiddenWithErrorAndPayload": {
+        "type": "object",
+        "properties": {
+          "error": { "$ref": "#/components/schemas/ErrorMessageWithCode" },
+          "payload": { "$ref": "#/components/schemas/ForbiddenErrorPayload" }
+        }
+      },
+      "ForbiddenErrorPayload": {
+        "type": "object",
+        "properties": {
+          "walletPublicKey": { "$ref": "#/components/schemas/WalletPublicKey" },
+          "email": { "type": "string", "format": "email" }
+        }
+      },
+      "ErrorMessageWithCode": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "string" },
+          "message": { "type": "string" }
+        }
+      },
+      "MethodNotAllowed": {
+        "type": "object",
+        "properties": {
+          "error": { "type": "string", "example": "Method Not Allowed" }
+        }
+      },
+      "InternalServerError": {
+        "type": "object",
+        "properties": {
+          "error": { "type": "string", "example": "Internal Server Error" }
+        }
+      },
+      "UpdateProjectRequest": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/components/schemas/NonEmptyString" }
+        },
+        "required": ["name"]
+      },
+      "UpdateProjectResponse": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "name": { "type": "string", "example": "Example project name" }
+        }
+      },
+      "ProjectRequest": {
+        "required": ["name"],
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/components/schemas/NonEmptyString" }
+        }
+      },
+      "Project": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "example": "Acme corp" },
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "organizationId": { "$ref": "#/components/schemas/uuid" },
+          "projectEnvironments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "$ref": "#/components/schemas/uuid" },
+                "environmentName": { "type": "string" }
+              }
+            }
+          }
+        },
+        "required": ["name", "id", "organizationId"]
+      },
+      "ProjectsResponse": {
+        "type": "object",
+        "properties": {
+          "projects": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Project" }
+          }
+        }
+      },
+      "ProjectDocsResponse": {
+        "type": "object",
+        "properties": { "url": { "type": "string" } },
+        "required": ["url"]
+      },
+      "CreateProjectResponse": {
+        "type": "object",
+        "properties": {
+          "project": {
+            "type": "object",
+            "properties": {
+              "id": { "$ref": "#/components/schemas/uuid" },
+              "name": { "type": "string", "example": "Acme Corp" },
+              "organizationId": { "$ref": "#/components/schemas/uuid" },
+              "projectEnvironments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "$ref": "#/components/schemas/uuid" },
+                    "environmentName": { "type": "string", "example": "live" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "OrganizationRequest": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "$ref": "#/components/schemas/NonEmptyString" },
+          "description": { "$ref": "#/components/schemas/NonEmptyString" },
+          "websiteUrl": { "$ref": "#/components/schemas/NonEmptyUrl" }
+        }
+      },
+      "OrganizationResponse": {
+        "type": "object",
+        "properties": {
+          "organization": {
+            "type": "object",
+            "required": ["id", "name"],
+            "properties": {
+              "id": { "$ref": "#/components/schemas/uuid" },
+              "name": { "type": "string", "example": "Acme Corp" },
+              "description": {
+                "$ref": "#/components/schemas/OptionalNonEmptyString"
+              },
+              "websiteUrl": {
+                "$ref": "#/components/schemas/OptionalNonEmptyUrl"
+              }
+            }
+          }
+        }
+      },
+      "CreateTokenResponse": {
+        "type": "object",
+        "properties": {
+          "token": { "$ref": "#/components/schemas/TokenWithRaw" }
+        },
+        "required": ["token"]
+      },
+      "PostTokenFields": {
+        "type": "object",
+        "properties": { "note": { "type": "string" } },
+        "required": ["note"]
+      },
+      "TokenCreatedBy": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "alias": { "type": "string" },
+          "firstName": { "type": "string" },
+          "lastName": { "type": "string" },
+          "email": { "type": "string", "format": "email" }
+        },
+        "required": ["id"]
+      },
+      "TokenWithRaw": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "rawToken": {
+            "type": "string",
+            "example": "dyn_aGLjTe3TUN40vSE75sTtgUx9AjIe0q4n3LFC",
+            "description": "The actual token created. If you do not save it, it can never be retrieved again"
+          },
+          "checksum": {
+            "type": "string",
+            "example": "4n3LFC",
+            "description": "A 6-character alpha-numeric string checksum of the random API Token. The last 6 characters of the raw token"
+          },
+          "createdBy": { "$ref": "#/components/schemas/TokenCreatedBy" },
+          "active": {
+            "type": "boolean",
+            "example": true,
+            "description": "Only active tokens can be used."
+          },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "note": { "type": "string" },
+          "projectEnvironmentId": { "$ref": "#/components/schemas/uuid" },
+          "projectEnvironment": {
+            "type": "object",
+            "properties": { "id": { "$ref": "#/components/schemas/uuid" } }
+          }
+        },
+        "required": [
+          "id",
+          "rawToken",
+          "checksum",
+          "createdBy",
+          "createdAt",
+          "projectEnvironmentId",
+          "projectEnvironment"
+        ]
+      },
+      "Token": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "checksum": {
+            "type": "string",
+            "example": "4n3LFC",
+            "description": "A 6-character alpha-numeric string checksum of the random API Token. The last 6 characters of the raw token"
+          },
+          "createdBy": { "$ref": "#/components/schemas/TokenCreatedBy" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "note": { "type": "string" },
+          "projectEnvironmentId": { "$ref": "#/components/schemas/uuid" },
+          "projectEnvironment": {
+            "type": "object",
+            "properties": { "id": { "$ref": "#/components/schemas/uuid" } }
+          }
+        },
+        "required": [
+          "id",
+          "checksum",
+          "createdBy",
+          "createdAt",
+          "projectEnvironmentId",
+          "projectEnvironment"
+        ]
+      },
+      "TokensResponse": {
+        "type": "object",
+        "properties": {
+          "tokens": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Token" }
+          }
+        }
+      },
+      "OriginResponse": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "origin": { "$ref": "#/components/schemas/origin" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "projectEnvironmentId": { "$ref": "#/components/schemas/uuid" }
+        }
+      },
+      "OriginsResponse": {
+        "type": "object",
+        "properties": {
+          "origins": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/OriginResponse" }
+          }
+        }
+      },
+      "RoleEnum": { "type": "string", "enum": ["admin", "viewer"] },
+      "ProjectSettings": {
+        "type": "object",
+        "properties": {
+          "chains": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ProjectSettingsChains" }
+          },
+          "kyc": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ProjectSettingsKyc" }
+          },
+          "design": { "$ref": "#/components/schemas/ProjectSettingsDesign" },
+          "general": { "$ref": "#/components/schemas/ProjectSettingsGeneral" },
+          "privacy": { "$ref": "#/components/schemas/ProjectSettingsPrivacy" },
+          "providers": {
+            "type": "array",
+            "description": "External integrations like e-mail, social credentials, mpc providers, etc.",
+            "items": { "$ref": "#/components/schemas/Provider" }
+          },
+          "sdk": { "$ref": "#/components/schemas/ProjectSettingsSdk" },
+          "security": { "$ref": "#/components/schemas/ProjectSettingsSecurity" }
+        },
+        "required": [
+          "chains",
+          "kyc",
+          "design",
+          "general",
+          "privacy",
+          "sdk",
+          "security"
+        ]
+      },
+      "ProviderCreateRequest": {
+        "type": "object",
+        "description": "Request body to create a new provider. The provider will be not enabled by default.",
+        "required": ["provider"],
+        "properties": {
+          "provider": { "$ref": "#/components/schemas/ProviderEnum" },
+          "clientId": {
+            "description": "Standard OAuth client ID. For more information, see: https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/",
+            "type": "string"
+          },
+          "clientSecret": {
+            "description": "Standard OAuth client secret key. For more information, see: https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/",
+            "type": "string"
+          },
+          "providerProjectId": {
+            "description": "Some providers require additional information, typically called a project ID or site ID",
+            "type": "string"
+          },
+          "defaultChainId": {
+            "description": "The default chain id the SDK should use",
+            "type": "integer"
+          }
+        }
+      },
+      "ProviderUpdateRequest": {
+        "type": "object",
+        "description": "Request body to update oauth properties and other metadata about a provider.",
+        "properties": {
+          "clientId": {
+            "description": "Standard OAuth client ID. For more information, see: https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/",
+            "type": "string"
+          },
+          "clientSecret": {
+            "description": "Standard OAuth client secret key. For more information, see: https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/",
+            "type": "string"
+          },
+          "providerProjectId": {
+            "description": "Some providers require additional information, typically called a project ID or site ID",
+            "type": "string"
+          },
+          "defaultChainId": {
+            "description": "The default chain id the SDK should use",
+            "type": "integer"
+          }
+        }
+      },
+      "Provider": {
+        "type": "object",
+        "required": ["provider"],
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "provider": { "$ref": "#/components/schemas/ProviderEnum" },
+          "enabledAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "clientId": {
+            "description": "Standard OAuth client ID. For more information, see: https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/",
+            "type": "string"
+          },
+          "clientSecret": {
+            "description": "Standard OAuth client secret key. For more information, see: https://www.oauth.com/oauth2-servers/client-registration/client-id-secret/",
+            "type": "string"
+          },
+          "providerProjectId": {
+            "description": "Some providers require additional information, typically called a project ID or site ID",
+            "type": "string"
+          },
+          "authorizationUrl": {
+            "description": "If the provider supports Oauth 2, this field will contain the URL of the login and authorization where a user can authorize the applciation to gain access to their provider account",
+            "type": "string"
+          },
+          "redirectUrl": {
+            "description": "If the provider supports Oauth 2, this field will contain the URL of redirect or callback URL which will need to be provided to the Oauth provider to properly configure your App tp talk with Dynamic",
+            "type": "string"
+          },
+          "defaultChainId": {
+            "description": "The default chain id the SDK should use",
+            "type": "integer"
+          }
+        }
+      },
+      "ProvidersResponse": {
+        "type": "object",
+        "properties": {
+          "providers": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Provider" }
+          }
+        }
+      },
+      "ProviderUrlsResponse": {
+        "type": "object",
+        "properties": {
+          "providerUrls": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ProviderUrl" }
+          }
+        }
+      },
+      "ProviderUrl": {
+        "type": "object",
+        "required": ["provider", "authorizationUrl", "redirectUrl"],
+        "properties": {
+          "provider": { "$ref": "#/components/schemas/ProviderEnum" },
+          "authorizationUrl": {
+            "description": "If the provider supports Oauth 2, this field will contain the URL of the login and authorization where a user can authorize the applciation to gain access to their provider account",
+            "type": "string"
+          },
+          "redirectUrl": {
+            "description": "If the provider supports Oauth 2, this field will contain the URL of redirect or callback URL which will need to be provided to the Oauth provider to properly configure your App tp talk with Dynamic",
+            "type": "string"
+          }
+        }
+      },
+      "ProviderEnum": {
+        "type": "string",
+        "enum": [
+          "emailOnly",
+          "magicLink",
+          "apple",
+          "bitbucket",
+          "discord",
+          "facebook",
+          "github",
+          "gitlab",
+          "google",
+          "instagram",
+          "linkedin",
+          "microsoft",
+          "twitch",
+          "twitter"
+        ]
+      },
+      "ProjectSettingsSecurity": {
+        "type": "object",
+        "properties": {
+          "jwtDuration": { "$ref": "#/components/schemas/Duration" },
+          "hCaptcha": { "$ref": "#/components/schemas/HCaptchaSettings" }
+        }
+      },
+      "HCaptchaSettings": {
+        "type": "object",
+        "properties": {
+          "enabled": { "type": "boolean" },
+          "secretKey": {
+            "description": "Secret key used to validate captcha response. This will never be surfaced in a GET response.",
+            "type": "string"
+          },
+          "siteKey": { "type": "string" }
+        }
+      },
+      "Duration": {
+        "type": "object",
+        "required": ["amount", "unit"],
+        "properties": {
+          "amount": { "type": "integer" },
+          "unit": { "$ref": "#/components/schemas/TimeUnitEnum" }
+        }
+      },
+      "TimeUnitEnum": { "type": "string", "enum": ["days", "hours"] },
+      "ProjectSettingsPrivacy": {
+        "type": "object",
+        "properties": { "collectIp": { "type": "boolean" } }
+      },
+      "ProjectSettingsGeneral": {
+        "type": "object",
+        "properties": {
+          "displayName": { "type": "string" },
+          "supportText": { "type": "string" },
+          "appLogo": { "type": "string", "format": "uri" },
+          "imageUserNotInAccessList": { "type": "string", "format": "uri" },
+          "imageUserInAccessList": { "type": "string", "format": "uri" },
+          "supportUrls": {
+            "$ref": "#/components/schemas/ProjectSettingsGeneralApps"
+          },
+          "collectUserDataWelcomeHeader": { "type": "string" },
+          "collectUserDataWelcomeMessage": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "skipOptionalKYCFieldDuringOnboarding": { "type": "boolean" }
+        }
+      },
+      "ProjectSettingsGeneralApps": {
+        "type": "object",
+        "additionalProperties": { "type": "string", "format": "uri" },
+        "example": {
+          "slack": "https://dynamic.xyz",
+          "twitter": "https://dynamic.xyz"
+        }
+      },
+      "ProjectSettingsSdk": {
+        "type": "object",
+        "properties": {
+          "socialSignIn": {
+            "type": "object",
+            "properties": {
+              "providers": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/SocialSignInProvider" }
+              }
+            }
+          },
+          "multiWallet": { "type": "boolean" },
+          "confirmWalletTransfers": { "type": "boolean" },
+          "onrampFunding": { "type": "boolean" },
+          "walletConnect": {
+            "type": "object",
+            "properties": {
+              "projectId": { "type": "string" },
+              "v2Enabled": { "type": "boolean" }
+            }
+          }
+        }
+      },
+      "ProjectSettingsDesign": {
+        "type": "object",
+        "properties": {
+          "modal": {
+            "$ref": "#/components/schemas/ProjectSettingsDesignModal"
+          },
+          "button": {
+            "$ref": "#/components/schemas/ProjectSettingsDesignButton"
+          },
+          "widget": {
+            "$ref": "#/components/schemas/ProjectSettingsDesignWidget"
+          }
+        }
+      },
+      "ProjectSettingsDesignModal": {
+        "type": "object",
+        "properties": {
+          "border": { "type": "string" },
+          "brand": { "type": "string" },
+          "primaryColor": { "type": "string" },
+          "radius": { "type": "integer" },
+          "theme": { "type": "string" },
+          "view": { "type": "string" },
+          "template": { "type": "string" },
+          "displayOrder": { "type": "array", "items": { "type": "string" } },
+          "emailOnly": { "type": "boolean" }
+        }
+      },
+      "ProjectSettingsDesignButton": {
+        "type": "object",
+        "properties": {
+          "background": { "type": "string" },
+          "fontColor": { "type": "string" },
+          "paddingHeight": { "type": "integer" },
+          "paddingWidth": { "type": "integer" },
+          "radius": { "type": "integer" }
+        }
+      },
+      "ProjectSettingsDesignWidget": {
+        "type": "object",
+        "properties": {
+          "backgroundColor": { "type": "string" },
+          "border": { "type": "string" },
+          "radius": { "type": "integer" },
+          "textColor": { "type": "string" },
+          "theme": { "type": "string" }
+        }
+      },
+      "ProjectSettingsChains": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "enabled": { "type": "boolean" },
+          "networks": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Network" }
+          }
+        },
+        "required": ["name", "enabled"]
+      },
+      "ProjectSettingsKyc": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "required": { "type": "boolean" },
+          "enabled": { "type": "boolean" },
+          "unique": { "type": "boolean" },
+          "verify": { "type": "boolean" }
+        },
+        "required": ["name", "required", "enabled", "unique", "verify"]
+      },
+      "IntegrationSetting": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "required": { "type": "boolean" },
+          "enabled": { "type": "boolean" }
+        },
+        "required": ["name", "enabled"]
+      },
+      "VerifyUnlinkRequest": {
+        "type": "object",
+        "properties": {
+          "walletId": { "$ref": "#/components/schemas/uuid" },
+          "verifiedCrentialId": { "$ref": "#/components/schemas/uuid" },
+          "primaryWalletId": { "$ref": "#/components/schemas/uuid" }
+        }
+      },
+      "PrefetchRequest": {
+        "required": ["chain", "publicWalletAddress"],
+        "type": "object",
+        "properties": {
+          "chain": { "$ref": "#/components/schemas/ChainEnum" },
+          "publicWalletAddress": {
+            "$ref": "#/components/schemas/WalletPublicKey"
+          }
+        }
+      },
+      "ConnectRequest": {
+        "required": ["address", "chain", "provider", "walletName"],
+        "type": "object",
+        "properties": {
+          "address": { "$ref": "#/components/schemas/WalletPublicKey" },
+          "chain": { "$ref": "#/components/schemas/ChainEnum" },
+          "provider": { "$ref": "#/components/schemas/WalletProviderEnum" },
+          "walletName": { "type": "string" },
+          "authMode": { "$ref": "#/components/schemas/AuthModeEnum" }
+        }
+      },
+      "AuthModeEnum": {
+        "type": "string",
+        "enum": ["connect-only", "connect-and-sign"]
+      },
+      "OauthRequest": {
+        "type": "object",
+        "required": ["code"],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Temporary auth code for oauth2 access"
+          }
+        }
+      },
+      "VerifyRequest": {
+        "required": [
+          "messageToSign",
+          "signedMessage",
+          "publicWalletAddress",
+          "chain",
+          "walletName",
+          "walletProvider"
+        ],
+        "type": "object",
+        "properties": {
+          "oauth": { "$ref": "#/components/schemas/OauthProviderRequest" },
+          "signedMessage": { "type": "string", "example": "signed message" },
+          "messageToSign": { "type": "string", "example": "message to sign" },
+          "publicWalletAddress": { "type": "string" },
+          "chain": { "$ref": "#/components/schemas/ChainEnum" },
+          "walletName": { "type": "string" },
+          "walletProvider": {
+            "$ref": "#/components/schemas/WalletProviderEnum"
+          },
+          "skipEmptyAccountCheck": {
+            "type": "boolean",
+            "description": "Used for wallet transfers. When set to true it will execute the transfer even if the wallet is the only one that the transferor has.Be warn that this will result an orphan account that will be impossible to access."
+          },
+          "captchaToken": { "$ref": "#/components/schemas/captchaToken" },
+          "network": { "type": "string" }
+        }
+      },
+      "EmailVerificationCreateRequest": {
+        "required": ["email"],
+        "type": "object",
+        "properties": {
+          "email": { "type": "string" },
+          "captchaToken": { "$ref": "#/components/schemas/captchaToken" }
+        }
+      },
+      "EmailVerificationVerifyRequest": {
+        "required": ["verificationUUID", "verificationToken"],
+        "type": "object",
+        "properties": {
+          "verificationUUID": { "$ref": "#/components/schemas/uuid" },
+          "verificationToken": { "type": "string", "example": 123456 },
+          "captchaToken": { "$ref": "#/components/schemas/captchaToken" }
+        }
+      },
+      "EmailVerificationRetryRequest": {
+        "required": ["verificationUUID", "email"],
+        "type": "object",
+        "properties": {
+          "verificationUUID": { "$ref": "#/components/schemas/uuid" },
+          "email": { "type": "string", "format": "email" },
+          "captchaToken": { "$ref": "#/components/schemas/captchaToken" }
+        }
+      },
+      "captchaToken": {
+        "type": "string",
+        "description": "When provided, used to verify that a captcha is valid and get the success/failure result from the captcha provider server-side."
+      },
+      "uuid": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+        "minLength": 36,
+        "maxLength": 36,
+        "example": "95b11417-f18f-457f-8804-68e361f9164f"
+      },
+      "origin": {
+        "type": "string",
+        "pattern": "^https?:\\/\\/[*a-zA-Z0-9.-]{1,256}(:[0-9]{1,5})?$",
+        "description": "An [RFC 6454](https://www.rfc-editor.org/rfc/rfc6454) valid url. Must not include any paths. A single wildcard (*) can be used as the first subdomain.",
+        "example": "http://*.example.com"
+      },
+      "orderBy": {
+        "type": "string",
+        "description": "$COLUMN_NAME-asc|desc",
+        "pattern": "^[A-Za-z]*-(asc|desc)$",
+        "example": "something-asc"
+      },
+      "ChainEnum": {
+        "type": "string",
+        "enum": ["ETH", "EVM", "FLOW", "SOL", "ALGO", "STARK", "COSMOS"]
+      },
+      "EnvironmentEnum": { "type": "string", "enum": ["sandbox", "live"] },
+      "WalletProviderEnum": {
+        "type": "string",
+        "enum": [
+          "browserExtension",
+          "custodialService",
+          "walletConnect",
+          "qrCode",
+          "deepLink"
+        ]
+      },
+      "UpdateSelfResponse": {
+        "type": "object",
+        "properties": {
+          "user": { "$ref": "#/components/schemas/SdkUser" },
+          "nextView": { "$ref": "#/components/schemas/NextViewEnum" },
+          "emailVerification": {
+            "$ref": "#/components/schemas/EmailVerificationCreateResponse"
+          },
+          "jwt": { "$ref": "#/components/schemas/EncodedJwt" }
+        },
+        "required": ["user", "nextView", "jwt"]
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": { "user": { "$ref": "#/components/schemas/User" } }
+      },
+      "UserFilterableFieldsEnum": {
+        "type": "string",
+        "enum": [
+          "all",
+          "id",
+          "walletPublicKey",
+          "email",
+          "alias",
+          "firstName",
+          "lastName",
+          "phoneNumber",
+          "jobTitle",
+          "wallet"
+        ]
+      },
+      "VisitorFilterableFieldsEnum": {
+        "type": "string",
+        "enum": ["all", "id", "walletPublicKey"]
+      },
+      "NextViewEnum": {
+        "type": "string",
+        "enum": ["done", "verify-email", "verified-and-transferred"]
+      },
+      "OrganizationMembersResponse": {
+        "type": "object",
+        "required": ["count", "members"],
+        "properties": {
+          "count": { "type": "integer" },
+          "members": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/OrganizationMember" }
+          }
+        }
+      },
+      "OrganizationMember": {
+        "type": "object",
+        "required": ["id", "user"],
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "user": { "$ref": "#/components/schemas/User" }
+        }
+      },
+      "UsersResponse": {
+        "type": "object",
+        "properties": {
+          "count": { "type": "integer" },
+          "users": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/User" }
+          }
+        }
+      },
+      "VisitorsResponse": {
+        "type": "object",
+        "properties": {
+          "count": { "type": "integer" },
+          "visitors": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Visitor" }
+          }
+        }
+      },
+      "SubscriptionFreeScopeEnum": {
+        "type": "string",
+        "enum": [
+          "connect_only",
+          "design",
+          "api_keys",
+          "visit_management",
+          "settings_general",
+          "settings_security",
+          "settings_privacy",
+          "admin_orgs",
+          "admin_billing",
+          "admin_members",
+          "user_management"
+        ]
+      },
+      "SubscriptionAdvancedScopeEnum": {
+        "type": "string",
+        "enum": [
+          "connect_and_sign",
+          "multi_wallet",
+          "api_tokens",
+          "info_capture",
+          "access_list",
+          "chainalysis",
+          "analytics_users",
+          "analytics_visits",
+          "captcha",
+          "signin_with_email"
+        ]
+      },
+      "UserWalletsResponse": {
+        "type": "object",
+        "properties": {
+          "count": { "type": "integer" },
+          "wallets": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Wallet" }
+          }
+        },
+        "required": ["count", "wallets"]
+      },
+      "AllowlistEntriesResponse": {
+        "type": "object",
+        "properties": {
+          "count": { "type": "integer" },
+          "entries": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/AllowlistEntry" }
+          }
+        }
+      },
+      "UserSearchFilterParams": {
+        "type": "object",
+        "properties": {
+          "filterValue": { "type": "string" },
+          "filterColumn": {
+            "$ref": "#/components/schemas/UserFilterableFieldsEnum"
+          },
+          "chain": { "$ref": "#/components/schemas/ChainEnum" }
+        }
+      },
+      "VisitorSearchFilterParams": {
+        "type": "object",
+        "properties": {
+          "filterValue": { "type": "string" },
+          "filterColumn": {
+            "$ref": "#/components/schemas/VisitorFilterableFieldsEnum"
+          },
+          "chain": { "$ref": "#/components/schemas/ChainEnum" }
+        }
+      },
+      "AnalyticsWalletsBreakdownResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "count": { "type": "integer" },
+            "walletName": { "type": "string" }
+          }
+        }
+      },
+      "AnalyticsVisitResponse": {
+        "type": "object",
+        "properties": {
+          "summedSessionsCount": { "type": "integer" },
+          "summedTotalUniqueCount": { "type": "integer" },
+          "users": { "$ref": "#/components/schemas/AnalyticsSessionsByDate" },
+          "visits": { "$ref": "#/components/schemas/AnalyticsSessionsByDate" }
+        }
+      },
+      "AnalyticsSessionsByDate": {
+        "type": "object",
+        "properties": {
+          "totalUnique": { "type": "number" },
+          "sessions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "count": { "type": "integer" },
+                "date": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "OrganizationsResponse": {
+        "type": "object",
+        "properties": {
+          "organizations": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Organization" }
+          }
+        }
+      },
+      "Organization": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "name": { "type": "string", "example": "Acme Corp" },
+          "description": {
+            "$ref": "#/components/schemas/OptionalNonEmptyString"
+          },
+          "websiteUrl": { "$ref": "#/components/schemas/OptionalNonEmptyUrl" }
+        }
+      },
+      "BillingSubscription": {
+        "type": "object",
+        "required": ["hasPaymentMethod", "planType", "inTrial", "scope"],
+        "properties": {
+          "billingPortalUrl": { "type": "string" },
+          "billingPortalAddPaymentMethodUrl": { "type": "string" },
+          "hasPaymentMethod": { "type": "boolean" },
+          "planType": {
+            "$ref": "#/components/schemas/BillingSubscriptionPlanTypeEnum"
+          },
+          "inTrial": { "type": "boolean" },
+          "scope": { "type": "array", "items": { "type": "string" } },
+          "trialStart": { "type": "string", "format": "date-time" },
+          "trialEnd": { "type": "string", "format": "date-time" },
+          "trialDaysLeft": { "type": "number" }
+        }
+      },
+      "BillingSubscriptionPlanTypeEnum": {
+        "type": "string",
+        "enum": ["free", "advanced", "enterprise"]
+      },
+      "OrganizationFields": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "#/components/schemas/NonEmptyString" },
+          "description": {
+            "$ref": "#/components/schemas/OptionalNonEmptyString"
+          },
+          "websiteUrl": { "$ref": "#/components/schemas/OptionalNonEmptyUrl" }
+        },
+        "required": ["name"]
+      },
+      "InviteSendRequest": {
+        "type": "object",
+        "properties": {
+          "walletPublicKey": { "$ref": "#/components/schemas/WalletPublicKey" },
+          "alias": { "$ref": "#/components/schemas/OptionalNonEmptyString" },
+          "email": { "$ref": "#/components/schemas/emailOrEmptyString" }
+        }
+      },
+      "InviteUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "status": { "$ref": "#/components/schemas/InviteStatusEnum" }
+        },
+        "required": ["status"]
+      },
+      "InviteStatusEnum": {
+        "type": "string",
+        "enum": ["pending", "rejected", "accepted", "cancelled"]
+      },
+      "InviteConflictResponse": {
+        "type": "object",
+        "properties": { "message": { "type": "string" } }
+      },
+      "InvitesResponse": {
+        "type": "object",
+        "properties": {
+          "count": { "type": "integer" },
+          "invites": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Invite" }
+          }
+        }
+      },
+      "Invite": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "organizationId": { "$ref": "#/components/schemas/uuid" },
+          "organizationName": { "type": "string" },
+          "status": { "$ref": "#/components/schemas/InviteStatusEnum" },
+          "email": { "type": "string", "format": "email" },
+          "alias": { "type": "string" },
+          "walletPublicKey": { "type": "string" }
+        },
+        "required": ["organizationId", "organizationName", "status"]
+      },
+      "SdkUser": {
+        "type": "object",
+        "required": ["id", "projectEnvironmentId"],
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "projectEnvironmentId": { "$ref": "#/components/schemas/uuid" },
+          "verifiedCredentials": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/JwtVerifiedCredential" }
+          },
+          "alias": { "type": "string", "nullable": true },
+          "country": { "$ref": "#/components/schemas/CountryCode" },
+          "email": { "type": "string", "format": "email", "nullable": true },
+          "firstName": { "type": "string", "nullable": true },
+          "jobTitle": { "type": "string", "nullable": true },
+          "lastName": { "type": "string", "nullable": true },
+          "phoneNumber": { "type": "string", "nullable": true },
+          "policiesConsent": { "type": "boolean", "nullable": true },
+          "tShirtSize": { "type": "string", "nullable": true },
+          "team": { "type": "string", "nullable": true },
+          "username": { "type": "string", "nullable": true },
+          "firstVisit": { "type": "string", "format": "date-time" },
+          "lastVisit": { "type": "string", "format": "date-time" },
+          "newUser": { "type": "boolean" },
+          "metadata": { "type": "object" }
+        }
+      },
+      "User": {
+        "allOf": [
+          { "$ref": "#/components/schemas/SdkUser" },
+          {
+            "type": "object",
+            "properties": {
+              "walletPublicKey": { "type": "string" },
+              "wallet": { "type": "string" },
+              "chain": { "$ref": "#/components/schemas/ChainEnum" },
+              "createdAt": { "type": "string", "format": "date-time" },
+              "updatedAt": { "type": "string", "format": "date-time" },
+              "sessions": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/Session" }
+              },
+              "wallets": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/Wallet" }
+              },
+              "chainalysisChecks": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/ChainalysisCheck" }
+              }
+            }
+          }
+        ]
+      },
+      "Visitor": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "address": { "type": "string" },
+          "chain": { "$ref": "#/components/schemas/ChainEnum" },
+          "walletName": { "type": "string" },
+          "provider": { "$ref": "#/components/schemas/WalletProviderEnum" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "projectEnvironmentId": { "$ref": "#/components/schemas/uuid" }
+        },
+        "required": [
+          "id",
+          "address",
+          "chain",
+          "walletName",
+          "provider",
+          "createdAt"
+        ]
+      },
+      "Wallet": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "name": { "$ref": "#/components/schemas/NonEmptyString" },
+          "chain": { "$ref": "#/components/schemas/ChainEnum" },
+          "publicKey": { "$ref": "#/components/schemas/WalletPublicKey" },
+          "provider": { "$ref": "#/components/schemas/WalletProviderEnum" }
+        },
+        "required": ["id", "name", "chain", "publicKey", "provider"]
+      },
+      "UserFields": {
+        "type": "object",
+        "properties": {
+          "email": { "$ref": "#/components/schemas/emailOrEmptyString" },
+          "alias": { "type": "string" },
+          "firstName": { "type": "string" },
+          "lastName": { "type": "string" },
+          "jobTitle": { "type": "string" },
+          "phoneNumber": { "type": "string" },
+          "tShirtSize": { "type": "string" },
+          "team": { "type": "string" },
+          "policiesConsent": { "type": "boolean" },
+          "country": { "$ref": "#/components/schemas/CountryCode" },
+          "username": { "$ref": "#/components/schemas/Username" },
+          "captchaToken": { "$ref": "#/components/schemas/captchaToken" },
+          "metadata": { "type": "object" }
+        }
+      },
+      "InternalUserFields": {
+        "type": "object",
+        "description": "User fields that can be updated on dashboard or through the rest API which do not involve any uniqueness checks or further verification",
+        "properties": {
+          "alias": { "type": "string" },
+          "firstName": { "type": "string" },
+          "lastName": { "type": "string" },
+          "jobTitle": { "type": "string" },
+          "phoneNumber": { "type": "string" },
+          "metadata": { "type": "object" },
+          "tShirtSize": { "type": "string" },
+          "team": { "type": "string" },
+          "policiesConsent": { "type": "boolean" },
+          "country": { "$ref": "#/components/schemas/CountryCode" }
+        }
+      },
+      "Username": {
+        "type": "string",
+        "nullable": true,
+        "description": "Alphanumeric usrname",
+        "pattern": "^$|^[a-zA-Z0-9]{5,20}$",
+        "example": "johndoe"
+      },
+      "CountryCode": {
+        "type": "string",
+        "nullable": true,
+        "description": "Standard ISO 3166-1 alpha-2 two-letter country code",
+        "pattern": "^[A-Z]{2}$",
+        "example": "US"
+      },
+      "emailOrEmptyString": {
+        "type": "string",
+        "pattern": "^$|(^[!#-'*+\\/-9=?A-Z^-~-]+(\\.[!#-'*+\\/-9=?A-Z^-~-]+)*|\"([]!#-[^-~ \\t]|(\\\\[\\t -~]))+\")@([!#-'*+\\/-9=?A-Z^-~-]+(\\.[!#-'*+\\/-9=?A-Z^-~-]+)*|\\[[\\t -Z^-~]*]$)",
+        "example": "hello-world@foobar.com"
+      },
+      "ProjectEnvironment": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "settings": { "$ref": "#/components/schemas/ProjectSettings" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" },
+          "sdkVersion": { "type": "string" }
+        },
+        "required": ["id"]
+      },
+      "Session": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "ipAddress": { "type": "string" },
+          "revokedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "ChainalysisConfiguration": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "sanctionsApiEnabled": { "type": "boolean" },
+          "kytApiEnabled": { "type": "boolean" },
+          "projectEnvironmentId": { "$ref": "#/components/schemas/uuid" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" }
+        },
+        "required": [
+          "id",
+          "projectEnvironmentId",
+          "sanctionsApiEnabled",
+          "kytApiEnabled",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "ChainalysisCheck": {
+        "type": "object",
+        "properties": {
+          "id": { "$ref": "#/components/schemas/uuid" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "result": {
+            "$ref": "#/components/schemas/ChainalysisCheckResultEnum"
+          },
+          "walletPublicKey": { "$ref": "#/components/schemas/WalletPublicKey" },
+          "response": { "type": "string" }
+        },
+        "required": ["id", "createdAt", "result", "walletPublicKey", "response"]
+      },
+      "ChainalysisCheckResultEnum": {
+        "type": "string",
+        "enum": ["OK", "BLOCKED", "FAILED"]
+      },
+      "NameService": {
+        "type": "object",
+        "properties": {
+          "registry": {
+            "type": "string",
+            "example": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e"
+          }
+        }
+      },
+      "Network": {
+        "type": "object",
+        "properties": {
+          "networkId": { "type": "number", "example": "1" },
+          "chainName": { "type": "string", "example": "Ethereum Mainnet" },
+          "enabled": { "type": "boolean" },
+          "rpcUrl": { "type": "string" }
+        },
+        "required": ["networkId", "enabled", "chainName"]
+      },
+      "NativeCurrency": {
+        "type": "object",
+        "properties": {
+          "decimals": { "type": "number", "example": "18" },
+          "name": { "type": "string", "example": "Ether" },
+          "symbol": { "type": "string", "example": "ETH" },
+          "denom": { "type": "string", "example": "uatom" }
+        },
+        "required": ["decimals", "name", "symbol"]
+      },
+      "NetworkConfiguration": {
+        "type": "object",
+        "properties": {
+          "lcdUrl": {
+            "type": "string",
+            "example": "https://lcd.osmosis.zone",
+            "description": "A light client, compared to a full node, tracks only pieces of certain information on a blockchain. Light clients do not track the entire state of a blockchain and also do not contain every transaction/block of a chain."
+          },
+          "chainName": {
+            "type": "string",
+            "description": "[Deprecated] use `name` property instead",
+            "example": "Ethereum Mainnet"
+          },
+          "name": { "type": "string", "example": "Ethereum Mainnet" },
+          "shortName": { "type": "string", "example": "ETH" },
+          "chain": { "type": "string", "example": "ETH" },
+          "chainId": { "type": "string", "example": "1" },
+          "nameService": { "$ref": "#/components/schemas/NameService" },
+          "networkId": { "type": "string", "example": "1" },
+          "iconUrls": { "type": "array", "items": { "type": "string" } },
+          "nativeCurrency": { "$ref": "#/components/schemas/NativeCurrency" },
+          "rpcUrls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "https://mainnet.infura.io/v3/"
+            }
+          },
+          "privateCustomerRpcUrls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "https://mainnet.infura.io/v3/"
+            }
+          },
+          "blockExplorerUrls": {
+            "type": "array",
+            "items": { "type": "string", "example": "https://etherscan.io/" }
+          },
+          "vanityName": { "type": "string", "example": "Ethereum" }
+        },
+        "required": [
+          "name",
+          "shortName",
+          "chain",
+          "chainId",
+          "networkId",
+          "iconUrls",
+          "nativeCurrency",
+          "rpcUrls",
+          "blockExplorerUrls"
+        ]
+      },
+      "NetworkConfigurationResponse": {
+        "type": "object",
+        "properties": {
+          "chainName": { "type": "string" },
+          "networks": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/NetworkConfiguration" }
+          }
+        }
+      },
+      "OnrampConfiguration": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "iconUrl": { "type": "string" },
+          "url": { "type": "string" }
+        }
+      },
+      "PublishEvents": {
+        "type": "object",
+        "properties": {
+          "events": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 10,
+            "items": {
+              "type": "object",
+              "properties": {
+                "anonymousId": { "type": "string" },
+                "event": { "type": "string" },
+                "properties": {
+                  "type": "object",
+                  "additionalProperties": true
+                },
+                "type": { "type": "string", "enum": ["track"] }
+              },
+              "required": ["anonymousId", "event", "properties", "type"]
+            }
+          }
+        },
+        "required": ["events"]
+      },
+      "SupportedOnrampsResponse": {
+        "type": "object",
+        "properties": {
+          "onramps": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/OnrampConfiguration" }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+  }
+}

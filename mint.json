@@ -283,6 +283,59 @@
           ]
         }
       ]
+    },
+    {
+      "group": "REST API",
+      "pages": ["api-reference/introduction"]
+    },
+    {
+      "group": "Dashboard API",
+      "pages": [
+        {
+          "group": "Gates",
+          "pages": [
+            "api-reference/gates/gets-the-gates-for-the-environment",
+            "api-reference/gates/creates-a-new-gate-for-the-project-environment",
+            "api-reference/gates/gets-a-gate",
+            "api-reference/gates/updates-a-gate",
+            "api-reference/gates/delete-a-gate",
+            "api-reference/gates/enable-the-gate-for-the-environment",
+            "api-reference/gates/disable-the-gate-for-the-environment"
+          ]
+        },
+        {
+          "group": "Settings",
+          "pages": ["api-reference/introduction"]
+        },
+        {
+          "group": "Environments",
+          "pages": ["api-reference/introduction"]
+        },
+        {
+          "group": "Wallets",
+          "pages": ["api-reference/introduction"]
+        },
+        {
+          "group": "Users",
+          "pages": ["api-reference/introduction"]
+        },
+        {
+          "group": "Visits",
+          "pages": ["api-reference/introduction"]
+        },
+        {
+          "group": "Origins",
+          "pages": ["api-reference/introduction"]
+        },
+        {
+          "group": "Tokens",
+          "pages": ["api-reference/introduction"]
+        },
+        {
+          "group": "Allowlists",
+          "pages": ["api-reference/introduction"]
+        }
+      ]
     }
   ],
   "footerSocials": {

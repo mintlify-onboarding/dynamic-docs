@@ -309,40 +309,75 @@
             "api-reference/Settings/Get-the-providers-for-an-environment",
             "api-reference/Settings/Creates-a-new-provider-for-the-project-environment",
             "api-reference/Settings/Get-the-providers-for-an-environment",
+            "api-reference/Settings/Gets-a-provider",
             "api-reference/Settings/Updates-a-provider",
             "api-reference/Settings/Delete-a-provider-by-providerId",
-            "api-reference/Settings/",
-            "api-reference/Settings/",
-            "api-reference/Settings/"
+            "api-reference/Settings/Enable-the-provider-for-the-environment",
+            "api-reference/Settings/Disable-the-provider-for-the-environment"
           ]
         },
         {
           "group": "Environments",
-          "pages": ["api-reference/introduction"]
+          "pages": [
+            "api-reference/Environments/Find-an-environment-by-ID",
+            "api-reference/Environments/Deletes-an-environment-by-ID",
+            "api-reference/Environments/Updates-the-environment-settings",
+            "api-reference/Environments/Get-the-unique-number-of-visitors-for-an-environment-by-environment-ID",
+            "api-reference/Environments/Get-keys-for-an-environment-given-environmentId",
+            "api-reference/Environments/Get-Live-and-Sandbox-environments-by-projectId"
+          ]
         },
         {
           "group": "Wallets",
-          "pages": ["api-reference/introduction"]
+          "pages": [
+            "api-reference/Wallets/Get-wallets-by-user",
+            "api-reference/Wallets/Get-wallets-by-user",
+            "api-reference/Wallets/Delete-wallet"
+          ]
         },
         {
           "group": "Users",
-          "pages": ["api-reference/introduction"]
+          "pages": [
+            "api-reference/Users/Update-a-user",
+            "api-reference/Users/Get-a-user-by-Id",
+            "api-reference/Users/Delete-user",
+            "api-reference/Users/Creates-a-new-user",
+            "api-reference/Users/Get-all-users-for-an-environment"
+          ]
         },
         {
           "group": "Visits",
-          "pages": ["api-reference/introduction"]
+          "pages": ["api-reference/Visits/Get-all-visitors-for-an-environment"]
         },
         {
           "group": "Origins",
-          "pages": ["api-reference/introduction"]
+          "pages": [
+            "api-reference/Origins/Get-all-the-allowed-origins-for-a-project-environment",
+            "api-reference/Origins/Adds-an-allowed-origin-for-this-project-environment",
+            "api-reference/Origins/Delete-a-origin-by-id"
+          ]
         },
         {
           "group": "Tokens",
-          "pages": ["api-reference/introduction"]
+          "pages": [
+            "api-reference/Tokens/Get-all-the-tokens-for-a-project-environment-(does-not-include-the-raw-token)",
+            "api-reference/Tokens/Create-a-new-API-Token",
+            "api-reference/Tokens/Delete-a-token-by-token-id"
+          ]
         },
         {
           "group": "Allowlists",
-          "pages": ["api-reference/introduction"]
+          "pages": [
+            "api-reference/Allowlists/Get-all-allowlists-for-a-environment",
+            "api-reference/Allowlists/Create-new-allowlist-for-a-environment",
+            "api-reference/Allowlists/Get-allowlist-by-id",
+            "api-reference/Allowlists/Delete-an-allowlist",
+            "api-reference/Allowlists/Enable-the-allowlist",
+            "api-reference/Allowlists/Disable-the-allow-list",
+            "api-reference/Allowlists/Get-all-entries-for-an-allowlist",
+            "api-reference/Allowlists/Create-a-new-entry-for-an-allowlist",
+            "api-reference/Allowlists/Delete-an-allowlist-entry"
+          ]
         }
       ]
     }

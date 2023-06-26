@@ -380,6 +380,21 @@
           ]
         }
       ]
+    },
+    {
+      "group": "Changelog",
+      "pages": [
+        "changelog/v0.17.11",
+        "changelog/v0.17.10",
+        "changelog/v0.17.09",
+        "changelog/v0.17.08",
+        "changelog/v0.17.07",
+        "changelog/v0.17.06",
+        "changelog/v0.17.05",
+        "changelog/v0.17.04",
+        "changelog/v0.17.03",
+        "changelog/v0.17.02"
+      ]
     }
   ],
   "footerSocials": {

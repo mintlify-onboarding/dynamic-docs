@@ -305,7 +305,16 @@
         },
         {
           "group": "Settings",
-          "pages": ["api-reference/introduction"]
+          "pages": [
+            "api-reference/Settings/Get-the-providers-for-an-environment",
+            "api-reference/Settings/Creates-a-new-provider-for-the-project-environment",
+            "api-reference/Settings/Get-the-providers-for-an-environment",
+            "api-reference/Settings/Updates-a-provider",
+            "api-reference/Settings/Delete-a-provider-by-providerId",
+            "api-reference/Settings/",
+            "api-reference/Settings/",
+            "api-reference/Settings/"
+          ]
         },
         {
           "group": "Environments",

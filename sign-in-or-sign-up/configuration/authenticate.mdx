@@ -48,7 +48,7 @@ If you elect to avoid authentication initially by using `connect-only`, but at s
 
 You can check the boolean `isAuthenticating` to check on the status of a user that is authenticating which will be either `true` or `false`.
 
-```typescript
+```typescript TypeScript
 import { useAuthenticateConnectedUser, useDynamicContext } from "@dynamic-labs/sdk-react";
 
 const Element = () => {
@@ -71,4 +71,8 @@ const Element = () => {
 
 This video below shows our [demo site](https://demo.dynamic.xyz). Here we start with a connected user who has not yet authenticated. We call the authenticateUser method and signature request appears. Once the user signs, then Dynamic verifies the signature and returns a JWT.
 
-![](https://mintlify-assets.b-cdn.net/connect_authenticate.mov)
+<video
+  controls
+  className="w-full aspect-video"
+  src="https://mintlify-assets.b-cdn.net/connect_authenticate.mov"
+></video>

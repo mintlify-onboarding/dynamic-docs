@@ -12,7 +12,7 @@ description: "Rainbowkit is a popular wallet adapter library built on [wagmi](ht
 
 To start, we will assume your current setup looks similar to this:
 
-```javascript
+```javascript javascript
 const App = () => {
   return (
     <WagmiConfig client={wagmiClient}>
@@ -63,7 +63,7 @@ You can read the full wagmi guide [here](/quickstart-and-tutorials/tutorials/wag
 
 First, we will swap out the Rainbowkit provider with the Dynamic one.
 
-```
+```javasript javascript
 const App = () => {
   return (
     <WagmiConfig client={wagmiClient}>
@@ -84,7 +84,7 @@ const App = () => {
 
 As mentioned in the full wagmi guide above, the `DynamicWagmiConnector` replaces `wagmiConfig` in the Dynamic setup. Note that the Dynamic provider wraps the Wagmi connector, vs wagmi wrapping the Rainbowkit adapter.
 
-```javascript
+```javascript javascript
 const App = () => {
   return (
     <DynamicContextProvider
@@ -105,7 +105,7 @@ const App = () => {
 
 Dynamic uses the Dynamic widget to manage wallets, connect, user profile etc. We will replace the Rainbowkit ConnectButton with it:
 
-```javascript
+```javascript javascript
 export const App = () => {
   return (
     <DynamicContextProvider

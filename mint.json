@@ -13,13 +13,13 @@
     "anchors": { "from": "#6393F8", "to": "#3D66E5" }
   },
   "topbarCtaButton": {
-    "name": "Start Free",
-    "url": "https://app.dynamic.xyz/"
+    "name": "Book a Demo",
+    "url": "https://www.dynamic.xyz/talk-to-us"
   },
   "topbarLinks": [
     {
-      "name": "Live Demo",
-      "url": "https://demo.dynamic.xyz/"
+      "name": "Launch App",
+      "url": "https://app.dynamic.xyz/"
     }
   ],
   "anchors": [

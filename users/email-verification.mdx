@@ -2,13 +2,17 @@
 title: "Email Verification"
 ---
 
-![](https://dynamic-labs.github.io/readme-embeds/videos/email_verification.mov)
+<video
+  controls
+  className="w-full aspect-video"
+  src="https://dynamic-labs.github.io/readme-embeds/videos/email_verification.mov"
+></video>
 
 **Summary**
 
-This page expands on the information capture described  [here](/users/information-capture) but for email, with added support for Uniqueness and Verification options.
+This page expands on the information capture described [here](/users/information-capture) but for email, with added support for Uniqueness and Verification options.
 
-**Email Verification** verifies the validity of an email address provided by a customer by sending a One Time Password (OTP to ensure it is a functional and active email address. This helps prevent errors in customer communication and ensures that customer data is accurate. 
+**Email Verification** verifies the validity of an email address provided by a customer by sending a One Time Password (OTP to ensure it is a functional and active email address. This helps prevent errors in customer communication and ensures that customer data is accurate.
 
 - Users will have 3 tries to enter the correct OTP and then will be locked out for 10 min before they can try again.
 
@@ -29,4 +33,5 @@ Note: If Email Verification is enabled, Email Uniqueness will also be mandatory.
     **🚧 Caution when toggling verification/uniqueness on Live mode**
 
     When enabling/disabling Email Verification and/or Uniqueness on live sites, be aware that such actions can result in data inconsistencies. If testing is necessary, it is recommended to conduct the tests on a Sandbox environment and to avoid frequently changing the fields on a live environment.
+
 </Warning>

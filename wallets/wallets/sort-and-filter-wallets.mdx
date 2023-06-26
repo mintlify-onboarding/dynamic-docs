@@ -19,7 +19,7 @@ The helper methods are:
 
 To filter and sort wallets, you'll want to use the `walletsFilter` prop under settings. You will then use either the one of the helper methods or BYOF to organize your wallet list.
 
-```typescript
+```typescript TypeScript
 import { DynamicContextProvider, DynamicWidget, FilterWallets } from '@dynamic-labs/sdk-react';
 ....
  <DynamicContextProvider
@@ -37,7 +37,7 @@ import { DynamicContextProvider, DynamicWidget, FilterWallets } from '@dynamic-l
 
 If you would like to filter out all wallets except for a predefined list, then call the FilterWallets method and include the wallets that you want your users to use:
 
-```typescript
+```typescript TypeScript
 import { DynamicContextProvider, DynamicWidget, FilterWallets } from '@dynamic-labs/sdk-react';
 ....
  <DynamicContextProvider
@@ -56,7 +56,7 @@ The rest of the wallets will keep their current order.
 
 [Optional]When using the SortWallets, you can also change the number of defaults wallets shown on Dynamic, while keeping all other wallets within search, you can do so by setting the defaultNumberOfWalletsToShow. \*
 
-```typescript
+```typescript TypeScript
 import { DynamicContextProvider, DynamicWidget, SortWallets } from '@dynamic-labs/sdk-react';
 ....
  <DynamicContextProvider
@@ -73,7 +73,7 @@ import { DynamicContextProvider, DynamicWidget, SortWallets } from '@dynamic-lab
 
 If you would like to combine the previous two options, then you can use the FilterAndSortWallets method to define the wallets that you want to appear in a specific order.
 
-```typescript
+```typescript TypeScript
 import { DynamicContextProvider, DynamicWidget, FilterAndSortWallets } from '@dynamic-labs/sdk-react';
 ....
  <DynamicContextProvider
@@ -89,7 +89,7 @@ import { DynamicContextProvider, DynamicWidget, FilterAndSortWallets } from '@dy
 
 If you want to remove specific wallets from the available list of wallets, you can call the RemoveWallets and specify which wallets you don't want your users to use:
 
-```typescript
+```typescript TypeScript
 import { DynamicContextProvider, DynamicWidget, RemoveWallets } from '@dynamic-labs/sdk-react';
 ....
  <DynamicContextProvider
@@ -107,7 +107,7 @@ If you want to dynamically filter the wallets that are showed by based on their 
 
 For example, this filter will return only the Solana wallets.
 
-```typescript
+```typescript TypeScript
 import { DynamicContextProvider, DynamicWidget, RemoveWallets } from '@dynamic-labs/sdk-react';
 ....
  <DynamicContextProvider
@@ -123,7 +123,7 @@ import { DynamicContextProvider, DynamicWidget, RemoveWallets } from '@dynamic-l
 
 If the above helper methods are not sufficient, you can design your own function and pass it to walletFilter.
 
-```typescript
+```typescript TypeScript
 <DynamicContextProvider
   settings={{
     ...
@@ -142,7 +142,7 @@ If the above helper methods are not sufficient, you can design your own function
 
 To find the key of all the wallets you can output all the keys using the following syntax:
 
-```typeScript
+```typeScript TypeScript
 import { useDynamicContext } from ‘@dynamic-labs/sdk-react’;
 
 const { wallets } = useDynamicContext();

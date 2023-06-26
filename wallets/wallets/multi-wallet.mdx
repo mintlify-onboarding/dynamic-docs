@@ -2,8 +2,11 @@
 title: "Multi-Wallet"
 ---
 
-![](https://dynamic-labs.github.io/readme-embeds/videos/multiwallet_docs_2.mov)
-
+<video
+  controls
+  className="w-full aspect-video"
+  src="https://dynamic-labs.github.io/readme-embeds/videos/multiwallet_docs_2.mov"
+></video>
 ## Summary
 
 Lots of users have multiple wallets but managing multiple wallets and multiple accounts for each wallet is challenging. You have to manage event listeners, various connection states, wallets shared across accounts, and much much more. If you want to learn more about our multi-wallet solution, check out our [blog post](https://www.dynamic.xyz/blog/multi-wallet-announcement).
@@ -26,7 +29,7 @@ To simplify management of these scenarios and the resulting edge cases, we've re
 
 The `multiWallet` prop is a boolean, that by default is set to `false`. If you want to enable it, set the prop to `true`.
 
-```typescript
+```typescript TypeScript
 <DynamicContextProvider
   settings={{
     multiWallet: true,

@@ -3,10 +3,9 @@ title: "Magic"
 ---
 
 <Warning>
-    **🚧 If you are using package splitting, ensure you include the magic package**
+    **If you are using package splitting, ensure you include the magic package**
 
     If you are using [package splitting](/quickstart-and-tutorials/tutorials/modular-sdk), ensure you are including the `@dynamic-labs/magic `package and exporting `MagicWalletConnectors`.
-
 </Warning>
 
 ## Summary
@@ -34,9 +33,11 @@ To add magic wallets to your sign up flow:
 
 ## Enable Social Sign in
 
-> 📘 Social sign in is currently available on v17 RC07+
->
-> If you want to get early access to this feature, reach out to us in our [Community Slack Channel](https://docs.dynamic.xyz/docs/support-1).
+<Note>
+   **📘 Social sign in is currently available on v17 RC07+**
+
+   If you want to get early access to this feature, reach out to us in our [Community Slack Channel](https://docs.dynamic.xyz/docs/support-1).
+</Note>
 
 1. To enable social sign in:
    1. You'll first need to setup your social oauth credentials in the **[Magic dashboard](https://dashboard.magic.link/)**.
@@ -50,7 +51,7 @@ To add magic wallets to your sign up flow:
 For users that sign up with these wallets in the background, you will be to access these wallets as you would any other wallet.
 
 <Warning>
-    **🚧 signTransaction is an unsupported method**
+    **signTransaction is an unsupported method**
 
     signTransaction is an unsupported method with MagicAuth. Make sure to use either the sendTransaction or signMessage methods.
 

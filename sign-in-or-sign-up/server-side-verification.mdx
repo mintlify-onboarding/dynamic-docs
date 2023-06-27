@@ -47,7 +47,7 @@ export const useFetch = (authToken: string | null) => {
 
 5. Verify the JWT on your server with the [node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) package
 
-```javascript
+```javascript JavaScript
 var jwt = require("jsonwebtoken");
 
 jwt.verify(token, publicKey, function (err, decodedToken) {

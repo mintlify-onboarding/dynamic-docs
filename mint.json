@@ -5,6 +5,9 @@
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"
   },
+  "api": {
+    "baseUrl": "https://app.dynamic.xyz/api/v0"
+  },
   "favicon": "/favicon.png",
   "colors": {
     "primary": "#4779FF",

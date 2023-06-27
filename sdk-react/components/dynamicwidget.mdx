@@ -32,37 +32,30 @@ export default App;
 ```
 
 <video
-  autoplay
-  muted
-  loop
-  playsinline
-  defaultMuted
+  controls
   className="w-full aspect-video"
   src="https://dynamic-labs.github.io/readme-embeds/videos/DynamicWidgetVariantModal.mov"
 ></video>
-### variant = dropdown
-
-```
-import { DynamicContextProvider, DynamicWidget} from '@dynamic-labs/sdk-react';
+``` import {(DynamicContextProvider, DynamicWidget)} from
+'@dynamic-labs/sdk-react';
 
 const App = () => (
-  <DynamicContextProvider
-     settings={{
-       environmentId: 'Enter your Environment ID here'
-    }}>
-    <DynamicWidget variant='dropdown' />
-  </DynamicContextProvider>
+
+{" "}
+<DynamicContextProvider
+  settings={{
+    environmentId: "Enter your Environment ID here",
+  }}
+>
+  <DynamicWidget variant="dropdown" />
+</DynamicContextProvider>
 );
 
 export default App;
 ```
 
 <video
-  autoplay
-  muted
-  loop
-  playsinline
-  defaultMuted
+  controls
   className="w-full aspect-video"
   src="https://dynamic-labs.github.io/readme-embeds/videos/DynamicWidgetVariantDropdown.mov"
 ></video>

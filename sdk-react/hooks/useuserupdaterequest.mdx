@@ -46,7 +46,7 @@ The `updateUser` function returns an object with the following properties:
 
 In this example, the `useUserUpdateRequest` hook is imported and used in the UserProfileEdit component. The `updateUser` function is called with the userFields object when the user saves their profile information. If email verification is required (`isEmailVerificationRequired` is true), the `verifyEmailFn` function is used to handle the email verification process. Once the email is verified or if email verification is not required, you can handle the successful update, such as by showing a success message or redirecting the user to another page.
 
-```typescript
+```typescript TypeScript
 import { useUserUpdateRequest } from '@dynamic-labs/sdk-react';
 
 function UserProfileEdit() {

@@ -334,7 +334,7 @@
           "group": "Wallets",
           "pages": [
             "api-reference/Wallets/Get-wallets-by-user",
-            "api-reference/Wallets/Get-wallets-by-user",
+            "api-reference/Wallets/Get-a-wallet-using-the-ID",
             "api-reference/Wallets/Delete-wallet"
           ]
         },
